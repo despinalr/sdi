@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" ng-app>
   <head>
-    <title>Chat Example</title>
+    <title>SDI - Sport Development Intelligence</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
@@ -47,16 +47,18 @@
   </head>
   <body>
     <div class="container" ng-controller="ChatController">
-      <div class="navbar navbar-fixed-top navbar-inverse">
+      <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
-          <div class="pull-right">
-            <a href="https://c9.io" class="brand">Cloud9 IDE</a>
+          <div class="pull-left">
+            <a href="https://c9.io" class="brand">SDI</a>
           </div>
+          <a class="navbar-brand" href="#">Brand</a>
         </div>
       </div>
       <div class="page-header">
-        <h1>Chat Example David Espinal</h1>
+        <h1>Sport Development Intelligence 2</h1>
       </div>
+      <div id="mapContainer"></div>
       <div class="row">
         <div class="span3">
           <ul class="nav nav-list well">
@@ -96,5 +98,10 @@
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/angular.min.js"></script>
+    
+    <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/mapdata/countries/co/co-all.js"></script>
+    <script src="/js/highmaps.js"></script>
   </body>
 </html>
