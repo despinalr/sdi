@@ -1,5 +1,5 @@
 var data = [
-    ['co-sa', 0],
+    ['co-sa',0],
     ['co-ca', 1],
     ['co-na', 2],
     ['co-ch', 3],
@@ -42,11 +42,11 @@ Highcharts.mapChart('mapContainer', {
     },
 
     title: {
-        text: 'Highmaps basic demo'
+        text: 'Mapa de Inversiones'
     },
 
     subtitle: {
-        text: 'Source map: <a href="http://code.highcharts.com/mapdata/countries/co/co-all.js">Colombia</a>'
+        text: 'Nivel de Riesgo'
     },
 
     mapNavigation: {
@@ -57,12 +57,18 @@ Highcharts.mapChart('mapContainer', {
     },
 
     colorAxis: {
-        min: 0
+        min: 0,
+        max: 30,
+        stops: [
+            [0, '#009900'],
+            [0.5, '#ffff00'],
+            [0.9, '#cc0000']
+        ],
     },
 
     series: [{
         data: data,
-        name: 'Random data',
+        name: 'Riesgo Alto',
         states: {
             hover: {
                 color: '#BADA55'
