@@ -7,10 +7,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SDI - Sport Development Intelligence</title>
+    <title>{{ title }}</title>
 
     <link href="/css/bootstrap.min.css" rel="stylesheet">
-	  <link href="/css/sb-admin-2.css" rel="stylesheet">
+	<link href="/css/sb-admin-2.css" rel="stylesheet">
     <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="/css/maps.css" rel="stylesheet" >
 </head>
@@ -26,7 +26,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><img src="/img/SDI-LOGO.png" height="35" width="100"></a>
+                <a class="navbar-brand" href="/"><img src="/img/SDI-LOGO.png" height="35" width="100"></a>
             </div>
             <!-- Header -->
 
@@ -79,16 +79,16 @@
                             </div>
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Medidor de Inversiones</a>
+                            <a href="/"><i class="fa fa-dashboard fa-fw"></i> Medidor de Inversiones</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Gráficos<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="index.html">Infraestructura</a>
+                                    <a href="/">Infraestructura</a>
                                 </li>
                                 <li>
-                                    <a href="index.html">Recursos</a>
+                                    <a href="/resources">Recursos</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -100,22 +100,15 @@
         </nav>
 
         <div id="page-wrapper">
-			Aqui van las gráficas
 			<br/><br/>
-			<div id="mapContainer"></div>
-			<br/><br/>
-			<div id="bubbleContainer"></div>
-			<br/>Alta Inversion + Alto Tiempo = Riesgo
-			<br/>Baja Inversion + Alto Tiempo = Indeseable
-			<br/>Alta Inversion + Bajo Tiempo = Deseable
-			<br/>Baja Inversion + Bajo Tiempo = Quick Win
+			<div id="{{ graph }}"></div>
 		</div>
     </div>
     <!-- wrapper -->
 
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-	  <script src="/js/metisMenu.min.js"></script>
+	<script src="/js/metisMenu.min.js"></script>
     <script src="/js/sb-admin-2.js"></script>
     
     <script src="https://code.highcharts.com/maps/highmaps.js"></script>
