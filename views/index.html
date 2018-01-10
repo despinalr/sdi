@@ -101,7 +101,7 @@
 
         <div id="page-wrapper">
 			<br/><br/>
-			<div id="{{ graph }}"></div>
+			{% autoescape false %}{{ graph }}{% endautoescape %}
 		</div>
     </div>
     <!-- wrapper -->
