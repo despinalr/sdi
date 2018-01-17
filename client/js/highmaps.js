@@ -42,11 +42,11 @@ Highcharts.mapChart('mapContainer', {
     },
 
     title: {
-        text: 'Mapa de Inversiones'
+        text: 'Barómetro'
     },
 
     subtitle: {
-        text: 'Nivel de Riesgo'
+        text: 'Seleccione el Departamento'
     },
 
     mapNavigation: {
@@ -64,6 +64,18 @@ Highcharts.mapChart('mapContainer', {
             [0.5, '#ffff00'],
             [0.9, '#cc0000']
         ],
+    },
+    
+    plotOptions:{
+    	series:{
+        	point:{
+            	events:{
+                	click: function(){
+                    	window.location = window.location + "department?idDepartment=" + this.options["hc-key"] + "&departmentName=" + this.name;
+                    }
+                }
+            }
+        }
     },
 
     series: [{

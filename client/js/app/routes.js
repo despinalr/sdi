@@ -74,4 +74,12 @@ module.exports = function (app) {
         });
 	});
 	
+	app.get('/department', function (req, res) {
+		res.render('index', {
+    	    title : 'SDI - Sport Development Intelligence',
+    	    departmentId: req.query.idDepartment,
+    	    departmentName: req.query.departmentName
+    	});
+	});
+	
 };
