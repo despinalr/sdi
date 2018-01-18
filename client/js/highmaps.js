@@ -71,7 +71,7 @@ Highcharts.mapChart('mapContainer', {
         	point:{
             	events:{
                 	click: function(){
-                    	window.location = window.location + "department?idDepartment=" + this.options["hc-key"] + "&departmentName=" + this.name;
+                    	window.location = window.location.origin + "/department/" + this.options["hc-key"];
                     }
                 }
             }

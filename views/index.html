@@ -110,11 +110,57 @@
         <div id="page-wrapper">
 			<br/><br/>
 			{% autoescape false %}{{ graph }}{% endautoescape %}
+
+			{% if departmentId or communeId %}
+			    <br/>
+			    <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Comuna
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href=/commune/1>Comuna 1</a></li>
+                        <li><a href=/commune/2>Comuna 2</a></li>
+                        <li><a href=/commune/3>Comuna 3</a></li>
+                        <li><a href=/commune/4>Comuna 4</a></li>
+                        <li><a href=/commune/5>Comuna 5</a></li>
+                        <li><a href=/commune/6>Comuna 6</a></li>
+                        <li><a href=/commune/7>Comuna 7</a></li>
+                        <li><a href=/commune/8>Comuna 8</a></li>
+                        <li><a href=/commune/9>Comuna 9</a></li>
+                        <li><a href=/commune/10>Comuna 10</a></li>
+                        <li><a href=/commune/11>Comuna 11</a></li>
+                        <li><a href=/commune/12>Comuna 12</a></li>
+                        <li><a href=/commune/13>Comuna 13</a></li>
+                        <li><a href=/commune/14>Comuna 14</a></li>
+                        <li><a href=/commune/15>Comuna 15</a></li>
+                        <li><a href=/commune/16>Comuna 16</a></li>
+                        <li><a href=/commune/17>Comuna 17</a></li>
+                        <li><a href=/commune/18>Comuna 18</a></li>
+                        <li><a href=/commune/19>Comuna 19</a></li>
+                        <li><a href=/commune/20>Comuna 20</a></li>
+                        <li><a href=/commune/21>Comuna 21</a></li>
+                        <li><a href=/commune/22>Comuna 22</a></li>
+                    </ul>
+                </div>
+                
+                {% if communeId %}
+    			    <div class="btn-group">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             Barrio
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            {% autoescape false %}{{ neighborhood }}{% endautoescape %}
+                        </ul>
+                    </div>
+		        {% endif %}
+			{% endif %}
 			
-			{% if departmentId %}
+			{% if neighborhoodId %}
 			    <div class="panel panel-primary">
                         <div class="panel-heading">
-                            An&aacute;lisis de Recursos Deportivo - <b>{{ departmentName }}</b>
+                            An&aacute;lisis de Recursos Deportivo
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -157,16 +203,85 @@
                                     <!-- ------------------------------------------------------------------------------------------------ -->
                                 </div>
                                 <div class="tab-pane fade" id="profile-pills">
-                                    <h4>Profile Tab</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    <br/>
+                                    <!-- ------------------------------------------------------------------------------------------------ -->
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr align="center">
+                                                    <th>Nombre</th>
+                                                    <th>Tipo</th>
+                                                    <th>Valor</th>
+                                                    <th>Dirección</th>
+                                                    <th>Teléfono</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Cancha</td>
+                                                    <td>Recurso Físico</td>
+                                                    <td>12.000.000</td>
+                                                    <td>Carrera 38 No. 10 - 112</td>
+                                                    <td>3373423</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- ------------------------------------------------------------------------------------------------ -->
                                 </div>
                                 <div class="tab-pane fade" id="messages-pills">
-                                    <h4>Messages Tab</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    <br/>
+                                    <!-- ------------------------------------------------------------------------------------------------ -->
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr align="center">
+                                                    <th>Nombre</th>
+                                                    <th>Tipo</th>
+                                                    <th>Valor</th>
+                                                    <th>Dirección</th>
+                                                    <th>Teléfono</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Cancha</td>
+                                                    <td>Recurso Físico</td>
+                                                    <td>12.000.000</td>
+                                                    <td>Carrera 38 No. 10 - 112</td>
+                                                    <td>3373423</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- ------------------------------------------------------------------------------------------------ -->
                                 </div>
                                 <div class="tab-pane fade" id="settings-pills">
-                                    <h4>Settings Tab</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    <br/>
+                                    <!-- ------------------------------------------------------------------------------------------------ -->
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr align="center">
+                                                    <th>Nombre</th>
+                                                    <th>Tipo</th>
+                                                    <th>Valor</th>
+                                                    <th>Dirección</th>
+                                                    <th>Teléfono</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Cancha</td>
+                                                    <td>Recurso Físico</td>
+                                                    <td>12.000.000</td>
+                                                    <td>Carrera 38 No. 10 - 112</td>
+                                                    <td>3373423</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- ------------------------------------------------------------------------------------------------ -->
                                 </div>
                             </div>
                         </div>

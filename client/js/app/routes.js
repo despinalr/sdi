@@ -74,11 +74,29 @@ module.exports = function (app) {
         });
 	});
 	
-	app.get('/department', function (req, res) {
+	app.get('/department/:idDepartment', function (req, res) {
 		res.render('index', {
     	    title : 'SDI - Sport Development Intelligence',
-    	    departmentId: req.query.idDepartment,
-    	    departmentName: req.query.departmentName
+    	    departmentId: req.params.idDepartment,
+    	    graph: '<div id="mapContainer"></div>'
+    	});
+	});
+	
+	app.get('/commune/:idCommune', function (req, res) {
+		fs.readFile(__dirname + '/../../html/communes/' + req.params.idCommune + '.html', 'utf8', function(err, text) {
+			res.render('index', {
+	    	    title : 'SDI - Sport Development Intelligence',
+	    	    communeId: req.params.idCommune,
+	    	    neighborhood: text,
+	    	    graph: '<div id="mapContainer"></div>'
+	    	});
+        });
+	});
+	
+	app.get('/neighborhood/:idNeighborhood', function (req, res) {
+		res.render('index', {
+    	    title : 'SDI - Sport Development Intelligence',
+    	    neighborhoodId: req.params.idNeighborhood
     	});
 	});
 	
