@@ -100,4 +100,24 @@ module.exports = function (app) {
     	});
 	});
 	
+	app.get('/neighborhood/:idNeighborhood/infra', function (req, res) {
+		//
+	});
+	
+	app.get('/neighborhood/:idNeighborhood/events', function (req, res) {
+		//
+	});
+	
+	app.get('/neighborhood/:idNeighborhood/organizations', function (req, res) {
+		//
+	});
+	
+	app.get('/neighborhood/:idNeighborhood/access', function (req, res) {
+		//
+	});
+	
+	app.get('/neighborhood/:idNeighborhood/processes', function (req, res) {
+		//
+	});
+	
 };
