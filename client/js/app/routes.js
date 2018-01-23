@@ -101,7 +101,11 @@ module.exports = function (app) {
 	});
 	
 	app.get('/neighborhood/:idNeighborhood/infra', function (req, res) {
-		//
+		res.render('index', {
+    	    title : 'SDI - Sport Development Intelligence',
+    	    neighborhoodId1: req.params.idNeighborhood,
+    	    neighborhoodData: 'Algo'
+    	});
 	});
 	
 	app.get('/neighborhood/:idNeighborhood/events', function (req, res) {

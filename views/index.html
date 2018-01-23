@@ -110,7 +110,6 @@
         <div id="page-wrapper">
 			<br/><br/>
 			{% autoescape false %}{{ graph }}{% endautoescape %}
-
 			{% if departmentId or communeId %}
 			    <br/>
 			    <div class="btn-group">
@@ -156,9 +155,7 @@
                     </div>
 		        {% endif %}
 			{% endif %}
-			
 			{% if neighborhoodId %}
-		        <!-- -------------------------------------------------------------------------------------------------------------------- -->
 		        <div class="row">
     		        <div class="col-lg-3 col-md-6">
     		        <div class="panel panel-primary">
@@ -267,135 +264,39 @@
                     </div>
                 </div>
                 <!-- -------------------------------------------------------------------------------------------------------------------- -->
+			{% endif %}
+			{% if neighborhoodData %}
 			    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            An&aacute;lisis de Recursos Deportivo
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-pills">
-                                <li class="active"><a href="#home-pills" data-toggle="tab">Infraestructura</a></li>
-                                <li><a href="#profile-pills" data-toggle="tab">Eventos</a></li>
-                                <li><a href="#messages-pills" data-toggle="tab">Organizaciones Deportivas</a></li>
-                                <li><a href="#settings-pills" data-toggle="tab">Accesos y Permanencia</a></li>
-                                <li><a href="#settings-pills" data-toggle="tab">Procesos Deportivos</a></li>
-                            </ul>
-
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div class="tab-pane fade in active" id="home-pills">
-                                    <br/>
-                                    <!-- ------------------------------------------------------------------------------------------------ -->
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr align="center">
-                                                    <th>Nombre</th>
-                                                    <th>Tipo</th>
-                                                    <th>Valor</th>
-                                                    <th>Dirección</th>
-                                                    <th>Teléfono</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Cancha</td>
-                                                    <td>Recurso Físico</td>
-                                                    <td>12.000.000</td>
-                                                    <td>Carrera 38 No. 10 - 112</td>
-                                                    <td>3373423</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- ------------------------------------------------------------------------------------------------ -->
-                                </div>
-                                <div class="tab-pane fade" id="profile-pills">
-                                    <br/>
-                                    <!-- ------------------------------------------------------------------------------------------------ -->
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr align="center">
-                                                    <th>Nombre</th>
-                                                    <th>Tipo</th>
-                                                    <th>Valor</th>
-                                                    <th>Dirección</th>
-                                                    <th>Teléfono</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Cancha</td>
-                                                    <td>Recurso Físico</td>
-                                                    <td>12.000.000</td>
-                                                    <td>Carrera 38 No. 10 - 112</td>
-                                                    <td>3373423</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- ------------------------------------------------------------------------------------------------ -->
-                                </div>
-                                <div class="tab-pane fade" id="messages-pills">
-                                    <br/>
-                                    <!-- ------------------------------------------------------------------------------------------------ -->
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr align="center">
-                                                    <th>Nombre</th>
-                                                    <th>Tipo</th>
-                                                    <th>Valor</th>
-                                                    <th>Dirección</th>
-                                                    <th>Teléfono</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Cancha</td>
-                                                    <td>Recurso Físico</td>
-                                                    <td>12.000.000</td>
-                                                    <td>Carrera 38 No. 10 - 112</td>
-                                                    <td>3373423</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- ------------------------------------------------------------------------------------------------ -->
-                                </div>
-                                <div class="tab-pane fade" id="settings-pills">
-                                    <br/>
-                                    <!-- ------------------------------------------------------------------------------------------------ -->
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr align="center">
-                                                    <th>Nombre</th>
-                                                    <th>Tipo</th>
-                                                    <th>Valor</th>
-                                                    <th>Dirección</th>
-                                                    <th>Teléfono</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Cancha</td>
-                                                    <td>Recurso Físico</td>
-                                                    <td>12.000.000</td>
-                                                    <td>Carrera 38 No. 10 - 112</td>
-                                                    <td>3373423</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- ------------------------------------------------------------------------------------------------ -->
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.panel-body -->
+                    <div class="panel-heading">
+                        An&aacute;lisis de Recursos Deportivo - {{ neighborhoodData }}
                     </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr align="center">
+                                        <th>Nombre</th>
+                                        <th>Tipo</th>
+                                        <th>Valor</th>
+                                        <th>Dirección</th>
+                                        <th>Teléfono</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Cancha</td>
+                                        <td>Recurso Físico</td>
+                                        <td>12.000.000</td>
+                                        <td>Carrera 38 No. 10 - 112</td>
+                                        <td>3373423</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
 			{% endif %}
 		</div>
     </div>
