@@ -103,8 +103,9 @@ module.exports = function (app) {
 	app.get('/neighborhood/:idNeighborhood/infra', function (req, res) {
 		res.render('index', {
     	    title : 'SDI - Sport Development Intelligence',
-    	    neighborhoodId1: req.params.idNeighborhood,
-    	    neighborhoodData: 'Algo'
+    	    neighborhooodId: req.params.idNeighborhood,
+    	    neighborhoodData: 'Algo',
+    	    assetText: 'Infraestructura'
     	});
 	});
 	

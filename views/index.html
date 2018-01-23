@@ -263,12 +263,11 @@
                     </div>
                     </div>
                 </div>
-                <!-- -------------------------------------------------------------------------------------------------------------------- -->
 			{% endif %}
-			{% if neighborhoodData %}
+			{% if neighborhoodData and neighborhooodId and assetText %}
 			    <div class="panel panel-primary">
                     <div class="panel-heading">
-                        An&aacute;lisis de Recursos Deportivo - {{ neighborhoodData }}
+                        An&aacute;lisis de Recursos Deportivo - <b>{{ assetText }}</b>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -297,6 +296,7 @@
                     </div>
                     <!-- /.panel-body -->
                 </div>
+                <a href="/neighborhood/{{ neighborhooodId }}"><button type="button" class="btn btn-primary btn-circle"><i class="fa fa-arrow-left"></i></button></a>
 			{% endif %}
 		</div>
     </div>
