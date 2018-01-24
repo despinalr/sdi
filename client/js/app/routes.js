@@ -3,12 +3,10 @@ module.exports = function (app) {
     var fs = require('fs');
     
     app.get('/', function (req, res) {
-	    fs.readFile(__dirname + '/../../html/investments.html', 'utf8', function(err, text) {
-	        res.render('index', {
-        	    title : 'SDI - Sport Development Intelligence',
-        		graph: text
-        	});
-        });
+	    res.render('index', {
+    	    title : 'SDI - Sport Development Intelligence',
+    	    widgets: 1
+    	});
 	});
 	
 	app.get('/resources', function (req, res) {
@@ -77,8 +75,7 @@ module.exports = function (app) {
 	app.get('/department/:idDepartment', function (req, res) {
 		res.render('index', {
     	    title : 'SDI - Sport Development Intelligence',
-    	    departmentId: req.params.idDepartment,
-    	    graph: '<div id="mapContainer"></div>'
+    	    departmentId: req.params.idDepartment
     	});
 	});
 	
@@ -87,8 +84,7 @@ module.exports = function (app) {
 			res.render('index', {
 	    	    title : 'SDI - Sport Development Intelligence',
 	    	    communeId: req.params.idCommune,
-	    	    neighborhood: text,
-	    	    graph: '<div id="mapContainer"></div>'
+	    	    neighborhood: text
 	    	});
         });
 	});
@@ -96,32 +92,38 @@ module.exports = function (app) {
 	app.get('/neighborhood/:idNeighborhood', function (req, res) {
 		res.render('index', {
     	    title : 'SDI - Sport Development Intelligence',
-    	    neighborhoodId: req.params.idNeighborhood
+    	    neighborhoodId: req.params.idNeighborhood,
+    	    neighborhoodData: 'Algo'
     	});
 	});
 	
-	app.get('/neighborhood/:idNeighborhood/infra', function (req, res) {
+	app.get('/infra', function (req, res) {
 		res.render('index', {
     	    title : 'SDI - Sport Development Intelligence',
+    	    map: 1,
     	    neighborhooodId: req.params.idNeighborhood,
     	    neighborhoodData: 'Algo',
     	    assetText: 'Infraestructura'
     	});
 	});
 	
-	app.get('/neighborhood/:idNeighborhood/events', function (req, res) {
+	app.get('/events', function (req, res) {
 		//
 	});
 	
-	app.get('/neighborhood/:idNeighborhood/organizations', function (req, res) {
+	app.get('/organizations', function (req, res) {
 		//
 	});
 	
-	app.get('/neighborhood/:idNeighborhood/access', function (req, res) {
+	app.get('/access', function (req, res) {
 		//
 	});
 	
-	app.get('/neighborhood/:idNeighborhood/processes', function (req, res) {
+	app.get('/processes', function (req, res) {
+		//
+	});
+	
+	app.get('/procedures', function (req, res) {
 		//
 	});
 	

@@ -110,52 +110,45 @@
         <div id="page-wrapper">
 			<br/><br/>
 			{% autoescape false %}{{ graph }}{% endautoescape %}
-			{% if departmentId or communeId %}
-			    <br/>
+			{% if map %}
+			    <p style="text-align:center;"><img src="/img/mapacali.jpg" alt="" usemap="#Map" /></p>
+                <map name="Map" id="Map">
+                    <area target="" alt="Comuna 1" title="Comuna 1" href="/commune/1" coords="19,148,66,130" shape="rect">
+                    <area target="" alt="Comuna 2" title="Comuna 2" href="/commune/2" coords="127,68,148,104" shape="rect">
+                    <area target="" alt="Comuna 3" title="Comuna 3" href="/commune/3" coords="95,144,128,156" shape="rect">
+                    <area target="" alt="Comuna 4" title="Comuna 4" href="/commune/4" coords="154,97,178,119" shape="rect">
+                    <area target="" alt="Comuna 5" title="Comuna 5" href="/commune/5" coords="189,80,213,111" shape="rect">
+                    <area target="" alt="Comuna 6" title="Comuna 6" href="/commune/6" coords="204,35,226,64" shape="rect">
+                    <area target="" alt="Comuna 7" title="Comuna 7" href="/commune/7" coords="215,118,241,145" shape="rect">
+                    <area target="" alt="Comuna 8" title="Comuna 8" href="/commune/8" coords="156,139,180,166" shape="rect">
+                    <area target="" alt="Comuna 9" title="Comuna 9" href="/commune/9" coords="133,175,148,144" shape="rect">
+                    <area target="" alt="Comuna 10" title="Comuna 10" href="/commune/10" coords="137,205,119,226" shape="rect">
+                    <area target="" alt="Comuna 11" title="Comuna 11" href="/commune/11" coords="151,184,165,217" shape="rect">
+                    <area target="" alt="Comuna 12" title="Comuna 12" href="/commune/12" coords="175,172,191,191" shape="rect">
+                    <area target="" alt="Comuna 13" title="Comuna 13" href="/commune/13" coords="201,178,215,210" shape="rect">
+                    <area target="" alt="Comuna 14" title="Comuna 14" href="/commune/14" coords="235,178,254,222" shape="rect">
+                    <area target="" alt="Comuna 15" title="Comuna 15" href="/commune/15" coords="163,256,192,273" shape="rect">
+                    <area target="" alt="Comuna 16" title="Comuna 16" href="/commune/16" coords="154,229,172,243" shape="rect">
+                    <area target="" alt="Comuna 17" title="Comuna 17" href="/commune/17" coords="101,285,142,328" shape="rect">
+                    <area target="" alt="Comuna 18" title="Comuna 18" href="/commune/18" coords="65,272,88,308" shape="rect">
+                    <area target="" alt="Comuna 19" title="Comuna 19" href="/commune/19" coords="78,179,106,242" shape="rect">
+                    <area target="" alt="Comuna 20" title="Comuna 20" href="/commune/20" coords="44,194,68,225" shape="rect">
+                    <area target="" alt="Comuna 21" title="Comuna 21" href="/commune/21" coords="239,231,270,252" shape="rect">
+                    <area target="" alt="Comuna 22" title="Comuna 22" href="/commune/22" coords="83,354,133,397" shape="rect">
+                </map>
+			{% endif %}
+			{% if communeId %}
 			    <div class="btn-group">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Comuna
+                         Barrio
                         <span class="caret"></span>
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href=/commune/1>Comuna 1</a></li>
-                        <li><a href=/commune/2>Comuna 2</a></li>
-                        <li><a href=/commune/3>Comuna 3</a></li>
-                        <li><a href=/commune/4>Comuna 4</a></li>
-                        <li><a href=/commune/5>Comuna 5</a></li>
-                        <li><a href=/commune/6>Comuna 6</a></li>
-                        <li><a href=/commune/7>Comuna 7</a></li>
-                        <li><a href=/commune/8>Comuna 8</a></li>
-                        <li><a href=/commune/9>Comuna 9</a></li>
-                        <li><a href=/commune/10>Comuna 10</a></li>
-                        <li><a href=/commune/11>Comuna 11</a></li>
-                        <li><a href=/commune/12>Comuna 12</a></li>
-                        <li><a href=/commune/13>Comuna 13</a></li>
-                        <li><a href=/commune/14>Comuna 14</a></li>
-                        <li><a href=/commune/15>Comuna 15</a></li>
-                        <li><a href=/commune/16>Comuna 16</a></li>
-                        <li><a href=/commune/17>Comuna 17</a></li>
-                        <li><a href=/commune/18>Comuna 18</a></li>
-                        <li><a href=/commune/19>Comuna 19</a></li>
-                        <li><a href=/commune/20>Comuna 20</a></li>
-                        <li><a href=/commune/21>Comuna 21</a></li>
-                        <li><a href=/commune/22>Comuna 22</a></li>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        {% autoescape false %}{{ neighborhood }}{% endautoescape %}
                     </ul>
                 </div>
-                
-                {% if communeId %}
-    			    <div class="btn-group">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             Barrio
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            {% autoescape false %}{{ neighborhood }}{% endautoescape %}
-                        </ul>
-                    </div>
-		        {% endif %}
-			{% endif %}
-			{% if neighborhoodId %}
+	        {% endif %}
+			{% if widgets %}
 		        <div class="row">
     		        <div class="col-lg-3 col-md-6">
     		        <div class="panel panel-primary">
@@ -169,7 +162,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="/neighborhood/{{ neighborhoodId }}/infra">
+                        <a href="/infra">
                             <div class="panel-footer">
                                 <span class="pull-left">Ver</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -190,7 +183,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="/neighborhood/{{ neighborhoodId }}/events">
+                        <a href="/events">
                             <div class="panel-footer">
                                 <span class="pull-left">Ver</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -211,7 +204,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="/neighborhood/{{ neighborhoodId }}/organizations">
+                        <a href="/organizations">
                             <div class="panel-footer">
                                 <span class="pull-left">Ver</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -232,7 +225,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="/neighborhood/{{ neighborhoodId }}/access">
+                        <a href="/access">
                             <div class="panel-footer">
                                 <span class="pull-left">Ver</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -253,7 +246,28 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="/neighborhood/{{ neighborhoodId }}/processes">
+                        <a href="/processes">
+                            <div class="panel-footer">
+                                <span class="pull-left">Ver</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+    		        <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-list-alt fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div>Tr&aacute;mites</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="/procedures">
                             <div class="panel-footer">
                                 <span class="pull-left">Ver</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -264,10 +278,21 @@
                     </div>
                 </div>
 			{% endif %}
-			{% if neighborhoodData and neighborhooodId and assetText %}
+			{% if neighborhoodId and neighborhoodData %}
 			    <div class="panel panel-primary">
                     <div class="panel-heading">
-                        An&aacute;lisis de Recursos Deportivo - <b>{{ assetText }}</b>
+                        An&aacute;lisis de Recursos Deportivo
+                        <div class="pull-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-wrench"></i>
+                                </button>
+                                <ul class="dropdown-menu pull-right" role="menu">
+                                    <li><a href="#">Gr&aacute;ficos</a></li>
+                                    <li><a href="#">Exportar</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -296,7 +321,6 @@
                     </div>
                     <!-- /.panel-body -->
                 </div>
-                <a href="/neighborhood/{{ neighborhooodId }}"><button type="button" class="btn btn-primary btn-circle"><i class="fa fa-arrow-left"></i></button></a>
 			{% endif %}
 		</div>
     </div>
