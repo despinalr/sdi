@@ -1,6 +1,7 @@
 module.exports = function (app) {
     
     var fs = require('fs');
+    var mongo = require('./mongoose');
     
     app.get('/', function (req, res) {
 	    res.render('index', {
@@ -90,11 +91,14 @@ module.exports = function (app) {
 	});
 	
 	app.get('/neighborhood/:idNeighborhood', function (req, res) {
-		res.render('index', {
-    	    title : 'SDI - Sport Development Intelligence',
-    	    neighborhoodId: req.params.idNeighborhood,
-    	    neighborhoodData: 'Algo'
-    	});
+		mongo.findAllRecords(function(infras) {
+	    	res.render('index', {
+	    	    title : 'SDI - Sport Development Intelligence',
+	    	    neighborhoodId: req.params.idNeighborhood,
+	    	    //neighborhoodData: JSON.stringify(infras)
+	    	    neighborhoodData: infras
+	    	});
+	    });
 	});
 	
 	app.get('/infra', function (req, res) {
