@@ -92,11 +92,10 @@ module.exports = function (app) {
 	
 	app.get('/neighborhood/:idNeighborhood', function (req, res) {
 		mongo.findAllRecords(function(infras) {
-	    	res.render('index', {
+			res.render('index', {
 	    	    title : 'SDI - Sport Development Intelligence',
 	    	    neighborhoodId: req.params.idNeighborhood,
-	    	    //neighborhoodData: JSON.stringify(infras)
-	    	    neighborhoodData: infras
+	    	    neighborhoodData: infras[0]
 	    	});
 	    });
 	});

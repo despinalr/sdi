@@ -14,7 +14,6 @@ mongoose.connection.on('open', function() {
 
 exports.findAllRecords = function(callback) {
     infra.find({}, function(err, infras) {
-        console.log('Result: ' + infras);
         callback(infras);
     });
 };
