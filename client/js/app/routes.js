@@ -92,6 +92,7 @@ module.exports = function (app) {
 	
 	app.get('/neighborhood/:idNeighborhood', function (req, res) {
 		mongo.findAllRecords(function(infras) {
+			console.log(JSON.stringify(infras));
 			res.render('index', {
 	    	    title : 'SDI - Sport Development Intelligence',
 	    	    neighborhoodId: req.params.idNeighborhood,

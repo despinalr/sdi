@@ -300,21 +300,18 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr align="center">
-                                        <th>Nombre</th>
-                                        <th>Tipo</th>
-                                        <th>Valor</th>
-                                        <th>Dirección</th>
-                                        <th>Teléfono</th>
+                                        {% for h in neighborhoodData.infra.headers %}
+                                            <th>{{ h }}</th>
+                                        {% endfor %}
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {% for r in neighborhoodData.infra.rows %}
                                     <tr>
-                                        <td>Cancha</td>
-                                        <td>Recurso Físico</td>
-                                        <td>12.000.000</td>
-                                        <td>Carrera 38 No. 10 - 112</td>
-                                        <td>3373423</td>
+                                        <td>{{ r.name }}</td>
+                                        <td>{{ r.value }}</td>
                                     </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>

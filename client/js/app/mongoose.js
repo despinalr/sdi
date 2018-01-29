@@ -3,7 +3,15 @@ mongoose.connect('mongodb://despinalr:lpdp451789@ds121896.mlab.com:21896/sdi');
 //var objectId = mongoose.Schema.ObjectId;
 var infraSchema = new mongoose.Schema({
     id: String,
-    idNeighborhood: Number
+    idNeighborhood: Number,
+    infra: { 
+        headers: [String],
+        rows: [{
+            name: String,
+            value: String
+        }]
+    }
+    
 });
 
 var infra = mongoose.model('Infrastructure', infraSchema, 'Infrastructure');
