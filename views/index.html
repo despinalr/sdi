@@ -288,7 +288,7 @@
                                     <i class="fa fa-wrench"></i>
                                 </button>
                                 <ul class="dropdown-menu pull-right" role="menu">
-                                    <li><a href="#">Gr&aacute;ficos</a></li>
+                                    <li><a href="/neighborhood/{{ neighborhoodId }}/graph/types">Gr&aacute;ficos</a></li>
                                     <li><a href="#">Exportar</a></li>
                                 </ul>
                             </div>
@@ -319,6 +319,33 @@
                     <!-- /.panel-body -->
                 </div>
 			{% endif %}
+			{% if infraGraph %}
+			    <div class="panel-body">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-pills">
+                        <li {% if type == 'types' %}class="active"{% endif %}><a href="/neighborhood/{{ neighborhoodId }}/graph/types">Tipos</a></li>
+                        <li {% if type == 'inv' %}class="active"{% endif %}><a href="/neighborhood/{{ neighborhoodId }}/graph/inv">Inversión</a></li>
+                        <li {% if type == 'end' %}class="active"{% endif %}><a href="/neighborhood/{{ neighborhoodId }}/graph/end">Endeudamiento</a></li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="type-pills">
+                            {% if type == 'types' %}
+                                <div id="pieContainer"></div>
+                            {% endif %}
+                            {% if type == 'inv' %}
+                                Inversión
+                            {% endif %}
+                            {% if type == 'end' %}
+                                Endeudamiento
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+			    <br/>
+			    <a href="/neighborhood/{{ neighborhoodId }}"><button type="button" class="btn btn-primary btn-circle"><i class="fa fa-arrow-left"></i></button></a>
+			{% endif %}
 		</div>
     </div>
     <!-- wrapper -->
@@ -328,15 +355,16 @@
 	<script src="/js/metisMenu.min.js"></script>
     <script src="/js/sb-admin-2.js"></script>
     
-    <script src="https://code.highcharts.com/maps/highmaps.js"></script>
-    <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/mapdata/countries/co/co-all.js"></script>
+    <!-- <script src="https://code.highcharts.com/maps/highmaps.js"></script> -->
+    <!-- <script src="https://code.highcharts.com/maps/modules/exporting.js"></script> -->
+    <!-- <script src="https://code.highcharts.com/mapdata/countries/co/co-all.js"></script> -->
     
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/highcharts-more.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     
-    <script src="/js/highmaps.js"></script>
-    <script src="/js/highbubble.js"></script>
+    <!-- <script src="/js/highmaps.js"></script> -->
+    <!-- <script src="/js/highbubble.js"></script> -->
+    <script src="/js/highpie.js"></script>
 </body>
 </html>

@@ -92,13 +92,40 @@ module.exports = function (app) {
 	
 	app.get('/neighborhood/:idNeighborhood', function (req, res) {
 		mongo.findAllRecords(function(infras) {
-			console.log(JSON.stringify(infras));
+			//console.log(JSON.stringify(infras));
 			res.render('index', {
 	    	    title : 'SDI - Sport Development Intelligence',
 	    	    neighborhoodId: req.params.idNeighborhood,
 	    	    neighborhoodData: infras[0]
 	    	});
 	    });
+	});
+	
+	app.get('/neighborhood/:idNeighborhood/graph/types', function (req, res) {
+		res.render('index', {
+			infraGraph: 1,
+			type: 'types',
+    	    title : 'SDI - Sport Development Intelligence',
+    	    neighborhoodId: req.params.idNeighborhood
+    	});
+	});
+	
+	app.get('/neighborhood/:idNeighborhood/graph/inv', function (req, res) {
+		res.render('index', {
+			infraGraph: 1,
+			type: 'inv',
+    	    title : 'SDI - Sport Development Intelligence',
+    	    neighborhoodId: req.params.idNeighborhood
+    	});
+	});
+	
+	app.get('/neighborhood/:idNeighborhood/graph/end', function (req, res) {
+		res.render('index', {
+			infraGraph: 1,
+			type: 'end',
+    	    title : 'SDI - Sport Development Intelligence',
+    	    neighborhoodId: req.params.idNeighborhood
+    	});
 	});
 	
 	app.get('/infra', function (req, res) {
