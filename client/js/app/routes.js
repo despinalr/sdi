@@ -10,6 +10,13 @@ module.exports = function (app) {
     	});
 	});
 	
+	app.get('/gestion', function (req, res) {
+	    res.render('index', {
+    	    title : 'SDI - Sport Development Intelligence',
+    	    widgetsProcesses: 1
+    	});
+	});
+	
 	app.get('/resources', function (req, res) {
 	    fs.readFile(__dirname + '/../../html/resources.html', 'utf8', function(err, text) {
 	        res.render('index', {
