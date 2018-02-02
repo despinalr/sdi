@@ -8,7 +8,8 @@ var infraSchema = new mongoose.Schema({
         headers: [String],
         rows: [{
             name: String,
-            value: String
+            value: String,
+            typeInfra: String
         }]
     }
     
@@ -22,6 +23,20 @@ mongoose.connection.on('open', function() {
 
 exports.findAllRecords = function(callback) {
     infra.find({}, function(err, infras) {
+        callback(infras);
+    });
+};
+
+exports.aggregateRecords = function(callback) {
+    infra.aggregate([{
+        $unwind: "$infra.rows"
+    },
+    {
+        $group: {
+            _id: "$infra.rows.type",
+            total: { $sum: 1 }
+        }
+    }], function (err, infras) {
         callback(infras);
     });
 };

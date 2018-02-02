@@ -102,11 +102,20 @@ module.exports = function (app) {
 	});
 	
 	app.get('/neighborhood/:idNeighborhood/graph/types', function (req, res) {
-		res.render('index', {
-			infraGraph: 1,
-			type: 'types',
-    	    title : 'SDI - Sport Development Intelligence',
-    	    neighborhoodId: req.params.idNeighborhood
+		mongo.aggregateRecords(function(infras) {
+			//console.log(JSON.stringify(infras));
+			var countInfras = 0;
+			for(var i = 0; i < infras.length; i++) {
+		        countInfras += infras[i].total;
+		    }
+		    res.render('index', {
+				infraGraph: 1,
+				type: 'types',
+	    	    title : 'SDI - Sport Development Intelligence',
+	    	    neighborhoodId: req.params.idNeighborhood,
+	    	    countInfras: countInfras,
+	    	    infras: infras
+	    	});
     	});
 	});
 	

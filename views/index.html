@@ -88,19 +88,17 @@
                         <li>
                             <a href="/"><i class="fa fa-dashboard fa-fw"></i> Bar&oacute;metro</a>
                         </li>
-                        <!--
+                        
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Gráficos<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
+                            <a href="/gestion"><i class="fa fa-bar-chart-o fa-fw"></i> Gesti&oacute;n de Procesos</a>
+                            <!-- <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/">Infraestructura</a>
-                                </li>
-                                <li>
-                                    <a href="/resources">Recursos</a>
+                                    Talento Humano, Planeaci{on Financiera, Programas y Proyectos 
                                 </li>
                             </ul>
+                            -->
                         </li>
-                        -->
+                        
                     </ul>
                 </div>
             </div>
@@ -221,7 +219,7 @@
                                     <i class="fa fa-group fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div>Accesos y Permanencias</div>
+                                    <div>Acceso y Permanencia</div>
                                 </div>
                             </div>
                         </div>
@@ -310,6 +308,7 @@
                                     <tr>
                                         <td>{{ r.name }}</td>
                                         <td>{{ r.value }}</td>
+                                        <td>{{ r.typeInfra }}</td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
@@ -365,6 +364,44 @@
     
     <!-- <script src="/js/highmaps.js"></script> -->
     <!-- <script src="/js/highbubble.js"></script> -->
-    <script src="/js/highpie.js"></script>
+    <!-- <script src="/js/highpie.js"></script> -->
+    {% if infraGraph %}
+    {% if type == 'types' %}
+    <script>
+    Highcharts.chart('pieContainer', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Distribución de la Infraestructura'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Tipo',
+            colorByPoint: true,
+            data: [{% for i in infras %}{
+                name: '{{ i._id }}',
+                y: {{ (i.total * 100) / countInfras }}
+            }{% if not loop.last %},{% endif %}{% endfor %}]
+        }]
+    });
+    </script>
+    {% endif %}
+    {% endif %}
 </body>
 </html>
