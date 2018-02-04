@@ -127,21 +127,66 @@ module.exports = function (app) {
 	});
 	
 	app.get('/neighborhood/:idNeighborhood/graph/inv', function (req, res) {
-		res.render('index', {
-			infraGraph: 1,
-			type: 'inv',
-    	    title : 'SDI - Sport Development Intelligence',
-    	    neighborhoodId: req.params.idNeighborhood
-    	});
+		mongo.findAllRecords(function(infras) {
+			res.render('index', {
+				infraGraph: 1,
+				type: 'inv',
+	    	    title : 'SDI - Sport Development Intelligence',
+	    	    neighborhoodId: req.params.idNeighborhood,
+	    	    infras: infras
+	    	});
+		});
 	});
 	
 	app.get('/neighborhood/:idNeighborhood/graph/end', function (req, res) {
-		res.render('index', {
-			infraGraph: 1,
-			type: 'end',
-    	    title : 'SDI - Sport Development Intelligence',
-    	    neighborhoodId: req.params.idNeighborhood
-    	});
+		var presComercial = 0;
+		var gasComercial = 0;
+		var presMarketing = 0;
+		var gasMarketing = 0;
+		var presMantenimiento = 0;
+		var gasMantenimiento = 0;
+		var presAtencionCliente = 0;
+		var gasAtencionCliente = 0;
+		var presCapacitacion = 0;
+		var gasCapacitacion = 0;
+		var presAdministracion = 0;
+		var gasAdministracion = 0;
+		mongo.findAllRecords(function(infras) {
+			for(var i = 0; i < infras.length; i++) {
+				for(var j = 0; j < infras[i].infra.rows.length; j++) {
+					presComercial += infras[i].infra.rows[j].financial.presupuesto[0].comercial;
+					gasComercial += infras[i].infra.rows[j].financial.gasto[0].comercial;
+					presMarketing += infras[i].infra.rows[j].financial.presupuesto[1].marketing;
+					gasMarketing += infras[i].infra.rows[j].financial.gasto[1].marketing;
+					presMantenimiento += infras[i].infra.rows[j].financial.presupuesto[2].mantenimiento;
+					gasMantenimiento += infras[i].infra.rows[j].financial.gasto[2].mantenimiento;
+					presAtencionCliente += infras[i].infra.rows[j].financial.presupuesto[3].atencioncliente;
+					gasAtencionCliente += infras[i].infra.rows[j].financial.gasto[3].atencioncliente;
+					presCapacitacion += infras[i].infra.rows[j].financial.presupuesto[4].capacitacion;
+					gasCapacitacion += infras[i].infra.rows[j].financial.gasto[4].capacitacion;
+					presAdministracion += infras[i].infra.rows[j].financial.presupuesto[5].administracion;
+					gasAdministracion += infras[i].infra.rows[j].financial.gasto[5].administracion;
+				}
+		    }
+		    res.render('index', {
+				infraGraph: 1,
+				type: 'end',
+	    	    title : 'SDI - Sport Development Intelligence',
+	    	    neighborhoodId: req.params.idNeighborhood,
+	    	    presComercial: presComercial,
+				gasComercial: gasComercial,
+				presMarketing: presMarketing,
+				gasMarketing: gasMarketing,
+				presMantenimiento: presMantenimiento,
+				gasMantenimiento: gasMantenimiento,
+				presAtencionCliente: presAtencionCliente,
+				gasAtencionCliente: gasAtencionCliente,
+				presCapacitacion: presCapacitacion,
+				gasCapacitacion: gasCapacitacion,
+				presAdministracion: presAdministracion,
+				gasAdministracion: gasAdministracion
+	    	});
+		});
 	});
 	
 	app.get('/infra', function (req, res) {

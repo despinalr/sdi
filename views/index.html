@@ -370,6 +370,8 @@
                                         <td>{{ r.name }}</td>
                                         <td>{{ r.value }}</td>
                                         <td>{{ r.typeInfra }}</td>
+                                        <td>{{ r.active }}</td>
+                                        <td>{{ r.passive }}</td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
@@ -383,22 +385,25 @@
 			    <div class="panel-body">
                     <!-- Nav tabs -->
                     <ul class="nav nav-pills">
-                        <li {% if type == 'types' %}class="active"{% endif %}><a href="/neighborhood/{{ neighborhoodId }}/graph/types">Tipos</a></li>
-                        <li {% if type == 'inv' %}class="active"{% endif %}><a href="/neighborhood/{{ neighborhoodId }}/graph/inv">Inversión</a></li>
-                        <li {% if type == 'end' %}class="active"{% endif %}><a href="/neighborhood/{{ neighborhoodId }}/graph/end">Endeudamiento</a></li>
+                        <li {% if type == 'types' %}class="active"{% endif %}><a href="/neighborhood/{{ neighborhoodId }}/graph/types">Tipos de Escenarios</a></li>
+                        <li {% if type == 'inv' %}class="active"{% endif %}><a href="/neighborhood/{{ neighborhoodId }}/graph/inv">Situación Financiera</a></li>
+                        <li {% if type == 'end' %}class="active"{% endif %}><a href="/neighborhood/{{ neighborhoodId }}/graph/end">Presupuestos vs Gasto</a></li>
                     </ul>
 
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="type-pills">
                             {% if type == 'types' %}
+                            <br/>
                                 <div id="pieContainer"></div>
                             {% endif %}
                             {% if type == 'inv' %}
-                                Inversión
+                            <br/>
+                                <div id="stackedbarContainer"></div>
                             {% endif %}
                             {% if type == 'end' %}
-                                Endeudamiento
+                            <br/>
+                                <div id="spiderContainer"></div>
                             {% endif %}
                         </div>
                     </div>
@@ -459,6 +464,131 @@
                 name: '{{ i._id }}',
                 y: {{ (i.total * 100) / countInfras }}
             }{% if not loop.last %},{% endif %}{% endfor %}]
+        }]
+    });
+    </script>
+    {% endif %}
+    {% if type == 'inv' %}
+    <script>
+    Highcharts.chart('stackedbarContainer', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Activos vs Pasivos'
+        },
+        xAxis: {
+            categories: [{% for i in infras %}{% for j in i.infra.rows %}'{{ j.name }}'{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: ''
+            },
+            stackLabels: {
+                enabled: false,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
+            }
+        },
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        tooltip: {
+            headerFormat: '<b>{point.x}</b><br/>',
+            pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+                }
+            }
+        },
+        series: [{
+            name: 'Activos',
+            data: [{% for i in infras %}{% for j in i.infra.rows %}{{ j.active }}{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
+        }, {
+            name: 'Pasivos',
+            data: [{% for i in infras %}{% for j in i.infra.rows %}{{ j.passive }}{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
+        }]
+    });
+    </script>
+    {% endif %}
+    {% if type == 'end' %}
+    <script>
+    Highcharts.chart('spiderContainer', {
+        chart: {
+            polar: true,
+            type: 'line'
+        },
+    
+        title: {
+            text: 'Presupuesto vs Gasto',
+            x: -80
+        },
+    
+        pane: {
+            size: '80%'
+        },
+    
+        xAxis: {
+            categories: ['Comercial', 'Marketing', 'Mantenimiento', 'Atención al Cliente',
+                    'Capacitación', 'Administración'],
+            tickmarkPlacement: 'on',
+            lineWidth: 0
+        },
+    
+        yAxis: {
+            gridLineInterpolation: 'polygon',
+            lineWidth: 0,
+            min: 0
+        },
+    
+        tooltip: {
+            shared: true,
+            pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y:,.0f}</b><br/>'
+        },
+    
+        legend: {
+            align: 'right',
+            verticalAlign: 'top',
+            y: 70,
+            layout: 'vertical'
+        },
+    
+        series: [{
+            name: 'Presupuesto',
+            data: [
+                {{ presComercial }},
+        		{{ presMarketing }},
+        		{{ presMantenimiento }},
+        		{{ presAtencionCliente }},
+        		{{ presCapacitacion }},
+        		{{ presAdministracion }}],
+            pointPlacement: 'on'
+        }, {
+            name: 'Gasto',
+            data: [
+                {{ gasComercial }},
+        		{{ gasMarketing }},
+        		{{ gasMantenimiento }},
+        		{{ gasAtencionCliente }},
+        		{{ gasCapacitacion }},
+        		{{ gasAdministracion }}],
+            pointPlacement: 'on'
         }]
     });
     </script>

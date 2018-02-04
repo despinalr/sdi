@@ -9,7 +9,27 @@ var infraSchema = new mongoose.Schema({
         rows: [{
             name: String,
             value: String,
-            typeInfra: String
+            typeInfra: String,
+            active: Number,
+            passive: Number,
+            financial: {
+                presupuesto: [{
+                    comercial: Number,
+                    marketing: Number,
+                    mantenimiento: Number,
+                    atencioncliente: Number,
+                    capacitacion: Number,
+                    administracion: Number
+                }],
+                gasto: [{
+                    comercial: Number,
+                    marketing: Number,
+                    mantenimiento: Number,
+                    atencioncliente: Number,
+                    capacitacion: Number,
+                    administracion: Number
+                }]
+            }
         }]
     }
     
@@ -33,7 +53,7 @@ exports.aggregateRecords = function(callback) {
     },
     {
         $group: {
-            _id: "$infra.rows.type",
+            _id: "$infra.rows.typeInfra",
             total: { $sum: 1 }
         }
     }], function (err, infras) {
