@@ -47,6 +47,12 @@ exports.findAllRecords = function(callback) {
     });
 };
 
+exports.findRecords = function(filter, callback) {
+    infra.find(JSON.parse(filter), function(err, infras) {
+        callback(infras);
+    });
+};
+
 exports.aggregateRecords = function(callback) {
     infra.aggregate([{
         $unwind: "$infra.rows"

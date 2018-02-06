@@ -337,18 +337,20 @@
                     </div>
                 </div>
 			{% endif %}
-			{% if neighborhoodId and neighborhoodData %}
+			{% if grid %}
 			    <div class="panel panel-primary">
                     <div class="panel-heading">
-                        An&aacute;lisis de Recursos Deportivo - {{ neighborhoodData.idNeighborhood }}
+                        An&aacute;lisis de Recursos Deportivo
                         <div class="pull-right">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-wrench"></i>
                                 </button>
                                 <ul class="dropdown-menu pull-right" role="menu">
-                                    <li><a href="/neighborhood/{{ neighborhoodId }}/graph/types">Gr&aacute;ficos</a></li>
-                                    <li><a href="#">Exportar</a></li>
+                                    <li><a href="/neighborhood{% if neighborhoodId %}/{{ neighborhoodId }}{% endif %}/graph/types"><i class="fa fa-bar-chart-o fa-fw"></i> Gr&aacute;ficos</a></li>
+                                    <li><a href="#"><i class="fa fa-download fa-fw"></i> Exportar</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="/filter"><i class="fa fa-filter fa-fw"></i> Filtrar</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -359,20 +361,26 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr align="center">
-                                        {% for h in neighborhoodData.infra.headers %}
-                                            <th>{{ h }}</th>
+                                        {% for i in neighborhoodData %}
+                                            {% if loop.first %}
+                                                {% for h in i.infra.headers %}
+                                                    <th>{{ h }}</th>
+                                                {% endfor %}
+                                            {% endif %}
                                         {% endfor %}
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for r in neighborhoodData.infra.rows %}
-                                    <tr>
-                                        <td>{{ r.name }}</td>
-                                        <td>{{ r.value }}</td>
-                                        <td>{{ r.typeInfra }}</td>
-                                        <td>{{ r.active }}</td>
-                                        <td>{{ r.passive }}</td>
-                                    </tr>
+                                    {% for i in neighborhoodData %}
+                                        {% for r in i.infra.rows %}
+                                           <tr>
+                                               <td>{{ r.name }}</td>
+                                               <td>{{ r.value }}</td>
+                                               <td>{{ r.typeInfra }}</td>
+                                               <td>{{ r.active }}</td>
+                                               <td>{{ r.passive }}</td>
+                                           </tr> 
+                                        {% endfor %}
                                     {% endfor %}
                                 </tbody>
                             </table>
@@ -385,9 +393,9 @@
 			    <div class="panel-body">
                     <!-- Nav tabs -->
                     <ul class="nav nav-pills">
-                        <li {% if type == 'types' %}class="active"{% endif %}><a href="/neighborhood/{{ neighborhoodId }}/graph/types">Tipos de Escenarios</a></li>
-                        <li {% if type == 'inv' %}class="active"{% endif %}><a href="/neighborhood/{{ neighborhoodId }}/graph/inv">Situación Financiera</a></li>
-                        <li {% if type == 'end' %}class="active"{% endif %}><a href="/neighborhood/{{ neighborhoodId }}/graph/end">Presupuestos vs Gasto</a></li>
+                        <li {% if type == 'types' %}class="active"{% endif %}><a href="/neighborhood{% if neighborhoodId %}/{{ neighborhoodId }}{% endif %}/graph/types">Tipos de Escenarios</a></li>
+                        <li {% if type == 'inv' %}class="active"{% endif %}><a href="/neighborhood{% if neighborhoodId %}/{{ neighborhoodId }}{% endif %}/graph/inv">Situación Financiera</a></li>
+                        <li {% if type == 'end' %}class="active"{% endif %}><a href="/neighborhood{% if neighborhoodId %}/{{ neighborhoodId }}{% endif %}/graph/end">Presupuestos vs Gasto</a></li>
                     </ul>
 
                     <!-- Tab panes -->

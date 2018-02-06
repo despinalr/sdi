@@ -98,9 +98,10 @@ module.exports = function (app) {
 	});
 	
 	app.get('/neighborhood/:idNeighborhood', function (req, res) {
-		mongo.findAllRecords(function(infras) {
-			//console.log(JSON.stringify(infras));
-			res.render('index', {
+		var filter = "{\"" + "idNeighborhood" + "\": " + req.params.idNeighborhood + "}";
+		mongo.findRecords(filter, function(infras) {
+    		res.render('index', {
+				grid: 1,
 	    	    title : 'SDI - Sport Development Intelligence',
 	    	    neighborhoodId: req.params.idNeighborhood,
 	    	    neighborhoodData: infras[0]
@@ -108,7 +109,7 @@ module.exports = function (app) {
 	    });
 	});
 	
-	app.get('/neighborhood/:idNeighborhood/graph/types', function (req, res) {
+	app.get('/neighborhood/(:idNeighborhood)?/graph/types', function (req, res) {
 		mongo.aggregateRecords(function(infras) {
 			//console.log(JSON.stringify(infras));
 			var countInfras = 0;
@@ -126,7 +127,7 @@ module.exports = function (app) {
     	});
 	});
 	
-	app.get('/neighborhood/:idNeighborhood/graph/inv', function (req, res) {
+	app.get('/neighborhood/(:idNeighborhood)?/graph/inv', function (req, res) {
 		mongo.findAllRecords(function(infras) {
 			res.render('index', {
 				infraGraph: 1,
@@ -138,7 +139,7 @@ module.exports = function (app) {
 		});
 	});
 	
-	app.get('/neighborhood/:idNeighborhood/graph/end', function (req, res) {
+	app.get('/neighborhood/(:idNeighborhood)?/graph/end', function (req, res) {
 		var presComercial = 0;
 		var gasComercial = 0;
 		var presMarketing = 0;
@@ -190,12 +191,20 @@ module.exports = function (app) {
 	});
 	
 	app.get('/infra', function (req, res) {
+		mongo.findAllRecords(function(infras) {
+    		//console.log(JSON.stringify(infras));
+			res.render('index', {
+				grid: 1,
+	    	    title : 'SDI - Sport Development Intelligence',
+	    	    neighborhoodData: infras
+	    	});
+	    });
+	});
+	
+	app.get('/filter', function (req, res) {
 		res.render('index', {
     	    title : 'SDI - Sport Development Intelligence',
-    	    map: 1,
-    	    neighborhooodId: req.params.idNeighborhood,
-    	    neighborhoodData: 'Algo',
-    	    assetText: 'Infraestructura'
+    	    map: 1
     	});
 	});
 	
