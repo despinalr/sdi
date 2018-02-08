@@ -104,7 +104,7 @@ module.exports = function (app) {
 				grid: 1,
 	    	    title : 'SDI - Sport Development Intelligence',
 	    	    neighborhoodId: req.params.idNeighborhood,
-	    	    neighborhoodData: infras[0]
+	    	    neighborhoodData: infras
 	    	});
 	    });
 	});
@@ -112,6 +112,7 @@ module.exports = function (app) {
 	app.get('/neighborhood/(:idNeighborhood)?/graph/types', function (req, res) {
 		mongo.aggregateRecords(function(infras) {
 			//console.log(JSON.stringify(infras));
+//SI VIENE idNeighborhood SE DEBE FILTRAR
 			var countInfras = 0;
 			for(var i = 0; i < infras.length; i++) {
 		        countInfras += infras[i].total;
@@ -128,7 +129,12 @@ module.exports = function (app) {
 	});
 	
 	app.get('/neighborhood/(:idNeighborhood)?/graph/inv', function (req, res) {
-		mongo.findAllRecords(function(infras) {
+		var filter = "{}";
+		
+		if(req.params.idNeighborhood)
+			filter = "{\"" + "idNeighborhood" + "\": " + req.params.idNeighborhood + "}";
+			
+		mongo.findRecords(filter, function(infras) {
 			res.render('index', {
 				infraGraph: 1,
 				type: 'inv',
@@ -140,6 +146,11 @@ module.exports = function (app) {
 	});
 	
 	app.get('/neighborhood/(:idNeighborhood)?/graph/end', function (req, res) {
+		var filter = "{}";
+		
+		if(req.params.idNeighborhood)
+			filter = "{\"" + "idNeighborhood" + "\": " + req.params.idNeighborhood + "}";
+			
 		var presComercial = 0;
 		var gasComercial = 0;
 		var presMarketing = 0;
@@ -152,7 +163,8 @@ module.exports = function (app) {
 		var gasCapacitacion = 0;
 		var presAdministracion = 0;
 		var gasAdministracion = 0;
-		mongo.findAllRecords(function(infras) {
+		
+		mongo.findRecords(filter, function(infras) {
 			for(var i = 0; i < infras.length; i++) {
 				for(var j = 0; j < infras[i].infra.rows.length; j++) {
 					presComercial += infras[i].infra.rows[j].financial.presupuesto[0].comercial;
@@ -186,6 +198,57 @@ module.exports = function (app) {
 				gasCapacitacion: gasCapacitacion,
 				presAdministracion: presAdministracion,
 				gasAdministracion: gasAdministracion
+	    	});
+		});
+	});
+	
+	app.get('/neighborhood/(:idNeighborhood)?/graph/uso', function (req, res) {
+		var filter = "{}";
+		
+		if(req.params.idNeighborhood)
+			filter = "{\"" + "idNeighborhood" + "\": " + req.params.idNeighborhood + "}";
+			
+		mongo.findRecords(filter, function(infras) {
+			res.render('index', {
+				infraGraph: 1,
+				type: 'uso',
+	    	    title : 'SDI - Sport Development Intelligence',
+	    	    neighborhoodId: req.params.idNeighborhood,
+	    	    infras: infras
+	    	});
+		});
+	});
+	
+	app.get('/neighborhood/(:idNeighborhood)?/graph/calidad', function (req, res) {
+		var filter = "{}";
+		
+		if(req.params.idNeighborhood)
+			filter = "{\"" + "idNeighborhood" + "\": " + req.params.idNeighborhood + "}";
+			
+		mongo.findRecords(filter, function(infras) {
+			res.render('index', {
+				infraGraph: 1,
+				type: 'calidad',
+	    	    title : 'SDI - Sport Development Intelligence',
+	    	    neighborhoodId: req.params.idNeighborhood,
+	    	    infras: infras
+	    	});
+		});
+	});
+	
+	app.get('/neighborhood/(:idNeighborhood)?/graph/acceso', function (req, res) {
+		var filter = "{}";
+		
+		if(req.params.idNeighborhood)
+			filter = "{\"" + "idNeighborhood" + "\": " + req.params.idNeighborhood + "}";
+			
+		mongo.findRecords(filter, function(infras) {
+			res.render('index', {
+				infraGraph: 1,
+				type: 'acceso',
+	    	    title : 'SDI - Sport Development Intelligence',
+	    	    neighborhoodId: req.params.idNeighborhood,
+	    	    infras: infras
 	    	});
 		});
 	});

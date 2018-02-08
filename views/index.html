@@ -340,7 +340,7 @@
 			{% if grid %}
 			    <div class="panel panel-primary">
                     <div class="panel-heading">
-                        An&aacute;lisis de Recursos Deportivo
+                        Datos Generales
                         <div class="pull-right">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -396,6 +396,9 @@
                         <li {% if type == 'types' %}class="active"{% endif %}><a href="/neighborhood{% if neighborhoodId %}/{{ neighborhoodId }}{% endif %}/graph/types">Tipos de Escenarios</a></li>
                         <li {% if type == 'inv' %}class="active"{% endif %}><a href="/neighborhood{% if neighborhoodId %}/{{ neighborhoodId }}{% endif %}/graph/inv">Situación Financiera</a></li>
                         <li {% if type == 'end' %}class="active"{% endif %}><a href="/neighborhood{% if neighborhoodId %}/{{ neighborhoodId }}{% endif %}/graph/end">Presupuestos vs Gasto</a></li>
+                        <li {% if type == 'end' %}class="active"{% endif %}><a href="/neighborhood{% if neighborhoodId %}/{{ neighborhoodId }}{% endif %}/graph/uso">Uso del Escenario</a></li>
+                        <li {% if type == 'end' %}class="active"{% endif %}><a href="/neighborhood{% if neighborhoodId %}/{{ neighborhoodId }}{% endif %}/graph/calidad">Calidad</a></li>
+                        <li {% if type == 'end' %}class="active"{% endif %}><a href="/neighborhood{% if neighborhoodId %}/{{ neighborhoodId }}{% endif %}/graph/acceso">Acceso</a></li>
                     </ul>
 
                     <!-- Tab panes -->
@@ -412,6 +415,18 @@
                             {% if type == 'end' %}
                             <br/>
                                 <div id="spiderContainer"></div>
+                            {% endif %}
+                            {% if type == 'uso' %}
+                            <br/>
+                                <div id="usoContainer"></div>
+                            {% endif %}
+                            {% if type == 'calidad' %}
+                            <br/>
+                                <div id="calidadContainer"></div>
+                            {% endif %}
+                            {% if type == 'acceso' %}
+                            <br/>
+                                <div id="usoContainer"></div>
                             {% endif %}
                         </div>
                     </div>
