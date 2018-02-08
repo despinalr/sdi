@@ -379,6 +379,10 @@
                                                <td>{{ r.typeInfra }}</td>
                                                <td>{{ r.active }}</td>
                                                <td>{{ r.passive }}</td>
+                                               <td>{{ r.direccion }}</td>
+                                               <td>{{ r.extension }}</td>
+                                               <td>{{ r.responsable }}</td>
+                                               <td>{{ r.caracteristicas }}</td>
                                            </tr> 
                                         {% endfor %}
                                     {% endfor %}
@@ -396,9 +400,9 @@
                         <li {% if type == 'types' %}class="active"{% endif %}><a href="/neighborhood{% if neighborhoodId %}/{{ neighborhoodId }}{% endif %}/graph/types">Tipos de Escenarios</a></li>
                         <li {% if type == 'inv' %}class="active"{% endif %}><a href="/neighborhood{% if neighborhoodId %}/{{ neighborhoodId }}{% endif %}/graph/inv">Situación Financiera</a></li>
                         <li {% if type == 'end' %}class="active"{% endif %}><a href="/neighborhood{% if neighborhoodId %}/{{ neighborhoodId }}{% endif %}/graph/end">Presupuestos vs Gasto</a></li>
-                        <li {% if type == 'end' %}class="active"{% endif %}><a href="/neighborhood{% if neighborhoodId %}/{{ neighborhoodId }}{% endif %}/graph/uso">Uso del Escenario</a></li>
-                        <li {% if type == 'end' %}class="active"{% endif %}><a href="/neighborhood{% if neighborhoodId %}/{{ neighborhoodId }}{% endif %}/graph/calidad">Calidad</a></li>
-                        <li {% if type == 'end' %}class="active"{% endif %}><a href="/neighborhood{% if neighborhoodId %}/{{ neighborhoodId }}{% endif %}/graph/acceso">Acceso</a></li>
+                        <li {% if type == 'uso' %}class="active"{% endif %}><a href="/neighborhood{% if neighborhoodId %}/{{ neighborhoodId }}{% endif %}/graph/uso">Uso del Escenario</a></li>
+                        <li {% if type == 'calidad' %}class="active"{% endif %}><a href="/neighborhood{% if neighborhoodId %}/{{ neighborhoodId }}{% endif %}/graph/calidad">Calidad</a></li>
+                        <li {% if type == 'acceso' %}class="active"{% endif %}><a href="/neighborhood{% if neighborhoodId %}/{{ neighborhoodId }}{% endif %}/graph/acceso">Acceso</a></li>
                     </ul>
 
                     <!-- Tab panes -->

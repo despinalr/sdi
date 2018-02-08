@@ -12,6 +12,10 @@ var infraSchema = new mongoose.Schema({
             typeInfra: String,
             active: Number,
             passive: Number,
+            direccion: String,
+            extension: Number,
+            responsable: String,
+            caracteristicas: String,
             financial: {
                 presupuesto: [{
                     comercial: Number,
@@ -19,7 +23,7 @@ var infraSchema = new mongoose.Schema({
                     mantenimiento: Number,
                     atencioncliente: Number,
                     capacitacion: Number,
-                    administracion: Number
+                    administracion: Number,
                 }],
                 gasto: [{
                     comercial: Number,
