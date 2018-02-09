@@ -110,9 +110,13 @@ module.exports = function (app) {
 	});
 	
 	app.get('/neighborhood/(:idNeighborhood)?/graph/types', function (req, res) {
-		mongo.aggregateRecords(function(infras) {
+		var filter = "{}";
+		
+		if(req.params.idNeighborhood)
+			filter = "{\"" + "idNeighborhood" + "\": " + req.params.idNeighborhood + "}";
+			
+		mongo.aggregateRecords(filter, function(infras) {
 			//console.log(JSON.stringify(infras));
-//SI VIENE idNeighborhood SE DEBE FILTRAR
 			var countInfras = 0;
 			for(var i = 0; i < infras.length; i++) {
 		        countInfras += infras[i].total;

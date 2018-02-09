@@ -16,6 +16,11 @@ var infraSchema = new mongoose.Schema({
             extension: Number,
             responsable: String,
             caracteristicas: String,
+            calidad : {
+                buena: Number,
+                mala: Number,
+                regular: Number
+            },
             financial: {
                 presupuesto: [{
                     comercial: Number,
@@ -57,8 +62,11 @@ exports.findRecords = function(filter, callback) {
     });
 };
 
-exports.aggregateRecords = function(callback) {
+exports.aggregateRecords = function(filter, callback) {
     infra.aggregate([{
+        $match: JSON.parse(filter)
+    },
+    {
         $unwind: "$infra.rows"
     },
     {

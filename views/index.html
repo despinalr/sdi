@@ -351,6 +351,9 @@
                                     <li><a href="#"><i class="fa fa-download fa-fw"></i> Exportar</a></li>
                                     <li class="divider"></li>
                                     <li><a href="/filter"><i class="fa fa-filter fa-fw"></i> Filtrar</a></li>
+                                    {% if neighborhoodId %}
+                                    <li><a href="/infra"><i class="fa fa-angle-left fa-fw"></i> Quitar Filtro</a></li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
@@ -436,7 +439,7 @@
                     </div>
                 </div>
 			    <br/>
-			    <a href="/neighborhood/{{ neighborhoodId }}"><button type="button" class="btn btn-primary btn-circle"><i class="fa fa-arrow-left"></i></button></a>
+			    <a href="{% if neighborhoodId %}/neighborhood/{{ neighborhoodId }}{% else %}/infra{% endif %}"><button type="button" class="btn btn-primary btn-circle"><i class="fa fa-arrow-left"></i></button></a>
 			{% endif %}
 		</div>
     </div>
@@ -469,7 +472,7 @@
             type: 'pie'
         },
         title: {
-            text: 'Distribución de la Infraestructura'
+            text: 'Tipos de Escenarios'
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -616,6 +619,68 @@
         		{{ gasCapacitacion }},
         		{{ gasAdministracion }}],
             pointPlacement: 'on'
+        }]
+    });
+    </script>
+    {% endif %}
+    {% if type == 'calidad' %}
+    <script>
+    Highcharts.chart('calidadContainer', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Calidad'
+        },
+        xAxis: {
+            categories: [{% for i in infras %}{% for j in i.infra.rows %}'{{ j.name }}'{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: ''
+            },
+            stackLabels: {
+                enabled: false,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
+            }
+        },
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        tooltip: {
+            headerFormat: '<b>{point.x}</b><br/>',
+            pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+                }
+            }
+        },
+        series: [{
+            name: 'Buena',
+            data: [{% for i in infras %}{% for j in i.infra.rows %}{{ j.calidad.buena }}{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
+        }, {
+            name: 'Regular',
+            data: [{% for i in infras %}{% for j in i.infra.rows %}{{ j.calidad.regular }}{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
+        }, {
+            name: 'Mala',
+            data: [{% for i in infras %}{% for j in i.infra.rows %}{{ j.calidad.mala }}{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
         }]
     });
     </script>
