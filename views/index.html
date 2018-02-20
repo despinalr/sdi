@@ -433,7 +433,7 @@
                             {% endif %}
                             {% if type == 'acceso' %}
                             <br/>
-                                <div id="usoContainer"></div>
+                                <div id="accesoContainer"></div>
                             {% endif %}
                         </div>
                     </div>
@@ -682,6 +682,268 @@
             name: 'Mala',
             data: [{% for i in infras %}{% for j in i.infra.rows %}{{ j.calidad.mala }}{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
         }]
+    });
+    </script>
+    {% endif %}
+    {% if type == 'uso' %}
+    <script>
+    var colors = Highcharts.getOptions().colors,
+        categories = ['Deporte', 'Recreación', 'Actividad Física'],
+        data = [{
+            y: 56.33,
+            color: colors[0],
+            drilldown: {
+                name: 'Deporte',
+                categories: ['Futbol', 'Baloncesto', 'Voleibol', 'Futbol Sala', 'Natación', 'Tenis'],
+                data: [24.13, 17.2, 1.06, 8.11, 4.33, 1.5],
+                color: colors[0]
+            }
+        }, {
+            y: 18.67,
+            color: colors[1],
+            drilldown: {
+                name: 'Recreación',
+                categories: ['Dirigida', 'Práctica Libre'],
+                data: [5.92, 12.75],
+                color: colors[1]
+            }
+        }, {
+            y: 25,
+            color: colors[2],
+            drilldown: {
+                name: 'Actividad Física',
+                categories: ['Dirigida', 'Práctica Libre'],
+                data: [14.14, 10.86],
+                color: colors[2]
+            }
+        }],
+        browserData = [],
+        versionsData = [],
+        i,
+        j,
+        dataLen = data.length,
+        drillDataLen,
+        brightness;
+    
+    
+    // Build the data arrays
+    for (i = 0; i < dataLen; i += 1) {
+    
+        // add browser data
+        browserData.push({
+            name: categories[i],
+            y: data[i].y,
+            color: data[i].color
+        });
+    
+        // add version data
+        drillDataLen = data[i].drilldown.data.length;
+        for (j = 0; j < drillDataLen; j += 1) {
+            brightness = 0.2 - (j / drillDataLen) / 5;
+            versionsData.push({
+                name: data[i].drilldown.categories[j],
+                y: data[i].drilldown.data[j],
+                color: Highcharts.Color(data[i].color).brighten(brightness).get()
+            });
+        }
+    }
+    
+    // Create the chart
+    Highcharts.chart('usoContainer', {
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: 'Uso de los Escenarios'
+        },
+        subtitle: {
+            text: 'Tipo de Práctica'
+        },
+        yAxis: {
+            title: {
+                text: ''
+            }
+        },
+        plotOptions: {
+            pie: {
+                shadow: false,
+                center: ['50%', '50%']
+            }
+        },
+        tooltip: {
+            valueSuffix: '%'
+        },
+        series: [{
+            name: 'Browsers',
+            data: browserData,
+            size: '60%',
+            dataLabels: {
+                formatter: function () {
+                    return this.y > 5 ? this.point.name : null;
+                },
+                color: '#ffffff',
+                distance: -30
+            }
+        }, {
+            name: 'Versions',
+            data: versionsData,
+            size: '80%',
+            innerSize: '60%',
+            dataLabels: {
+                formatter: function () {
+                    // display only if larger than 1
+                    return this.y > 1 ? '<b>' + this.point.name + ':</b> ' +
+                        this.y + '%' : null;
+                }
+            },
+            id: 'versions'
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 400
+                },
+                chartOptions: {
+                    series: [{
+                        id: 'versions',
+                        dataLabels: {
+                            enabled: false
+                        }
+                    }]
+                }
+            }]
+        }
+    });
+    </script>
+    {% endif %}
+    {% if type == 'acceso' %}
+    <script>
+    var colors = Highcharts.getOptions().colors,
+        categories = ['Niños, Niñas y Adolescentes', 'Adultos', 'Adultos Mayores'],
+        data = [{
+            y: 46.33,
+            color: colors[0],
+            drilldown: {
+                name: 'Niños, Niñas y Adolescentes',
+                categories: ['Deporte', 'Recreación', 'Actividad Física'],
+                data: [14.33, 20, 12],
+                color: colors[0]
+            }
+        }, {
+            y: 21.67,
+            color: colors[1],
+            drilldown: {
+                name: 'Adultos',
+                categories: ['Deporte', 'Recreación', 'Actividad Física'],
+                data: [7.92, 6.75, 7],
+                color: colors[1]
+            }
+        }, {
+            y: 32,
+            color: colors[2],
+            drilldown: {
+                name: 'Adultos Mayores',
+                categories: ['Deporte', 'Recreación', 'Actividad Física'],
+                data: [5.14, 14.86, 12],
+                color: colors[2]
+            }
+        }],
+        browserData = [],
+        versionsData = [],
+        i,
+        j,
+        dataLen = data.length,
+        drillDataLen,
+        brightness;
+    
+    
+    // Build the data arrays
+    for (i = 0; i < dataLen; i += 1) {
+    
+        // add browser data
+        browserData.push({
+            name: categories[i],
+            y: data[i].y,
+            color: data[i].color
+        });
+    
+        // add version data
+        drillDataLen = data[i].drilldown.data.length;
+        for (j = 0; j < drillDataLen; j += 1) {
+            brightness = 0.2 - (j / drillDataLen) / 5;
+            versionsData.push({
+                name: data[i].drilldown.categories[j],
+                y: data[i].drilldown.data[j],
+                color: Highcharts.Color(data[i].color).brighten(brightness).get()
+            });
+        }
+    }
+    
+    // Create the chart
+    Highcharts.chart('accesoContainer', {
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: 'Oferta de Oportunidades de Acceso'
+        },
+        subtitle: {
+            text: 'al Deporte, Actividades Recreativas y Actividad Física'
+        },
+        yAxis: {
+            title: {
+                text: ''
+            }
+        },
+        plotOptions: {
+            pie: {
+                shadow: false,
+                center: ['50%', '50%']
+            }
+        },
+        tooltip: {
+            valueSuffix: '%'
+        },
+        series: [{
+            name: 'Browsers',
+            data: browserData,
+            size: '60%',
+            dataLabels: {
+                formatter: function () {
+                    return this.y > 5 ? this.point.name : null;
+                },
+                color: '#ffffff',
+                distance: -30
+            }
+        }, {
+            name: 'Versions',
+            data: versionsData,
+            size: '80%',
+            innerSize: '60%',
+            dataLabels: {
+                formatter: function () {
+                    // display only if larger than 1
+                    return this.y > 1 ? '<b>' + this.point.name + ':</b> ' +
+                        this.y + '%' : null;
+                }
+            },
+            id: 'versions'
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 400
+                },
+                chartOptions: {
+                    series: [{
+                        id: 'versions',
+                        dataLabels: {
+                            enabled: false
+                        }
+                    }]
+                }
+            }]
+        }
     });
     </script>
     {% endif %}
