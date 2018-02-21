@@ -21,6 +21,23 @@ var infraSchema = new mongoose.Schema({
                 mala: Number,
                 regular: Number
             },
+            acceso: {
+                deporte: {
+                    nino: Number,
+                    adultos: Number,
+                    mayores: Number
+                },
+                recreacion: {
+                    nino: Number,
+                    adultos: Number,
+                    mayores: Number
+                },
+                actividad: {
+                    nino: Number,
+                    adultos: Number,
+                    mayores: Number
+                }
+            },
             financial: {
                 presupuesto: [{
                     comercial: Number,

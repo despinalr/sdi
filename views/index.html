@@ -433,7 +433,11 @@
                             {% endif %}
                             {% if type == 'acceso' %}
                             <br/>
-                                <div id="accesoContainer"></div>
+                                <div id="accesoDeporteContainer"></div>
+                                <br/>
+                                <div id="accesoRecreacionContainer"></div>
+                                <br/>
+                                <div id="accesoActividadContainer"></div>
                             {% endif %}
                         </div>
                     </div>
@@ -818,132 +822,192 @@
     {% endif %}
     {% if type == 'acceso' %}
     <script>
-    var colors = Highcharts.getOptions().colors,
-        categories = ['Niños, Niñas y Adolescentes', 'Adultos', 'Adultos Mayores'],
-        data = [{
-            y: 46.33,
-            color: colors[0],
-            drilldown: {
-                name: 'Niños, Niñas y Adolescentes',
-                categories: ['Deporte', 'Recreación', 'Actividad Física'],
-                data: [14.33, 20, 12],
-                color: colors[0]
-            }
-        }, {
-            y: 21.67,
-            color: colors[1],
-            drilldown: {
-                name: 'Adultos',
-                categories: ['Deporte', 'Recreación', 'Actividad Física'],
-                data: [7.92, 6.75, 7],
-                color: colors[1]
-            }
-        }, {
-            y: 32,
-            color: colors[2],
-            drilldown: {
-                name: 'Adultos Mayores',
-                categories: ['Deporte', 'Recreación', 'Actividad Física'],
-                data: [5.14, 14.86, 12],
-                color: colors[2]
-            }
-        }],
-        browserData = [],
-        versionsData = [],
-        i,
-        j,
-        dataLen = data.length,
-        drillDataLen,
-        brightness;
-    
-    
-    // Build the data arrays
-    for (i = 0; i < dataLen; i += 1) {
-    
-        // add browser data
-        browserData.push({
-            name: categories[i],
-            y: data[i].y,
-            color: data[i].color
-        });
-    
-        // add version data
-        drillDataLen = data[i].drilldown.data.length;
-        for (j = 0; j < drillDataLen; j += 1) {
-            brightness = 0.2 - (j / drillDataLen) / 5;
-            versionsData.push({
-                name: data[i].drilldown.categories[j],
-                y: data[i].drilldown.data[j],
-                color: Highcharts.Color(data[i].color).brighten(brightness).get()
-            });
-        }
-    }
-    
-    // Create the chart
-    Highcharts.chart('accesoContainer', {
+    Highcharts.chart('accesoDeporteContainer', {
         chart: {
-            type: 'pie'
+            type: 'column'
         },
         title: {
-            text: 'Oferta de Oportunidades de Acceso'
+            text: 'Oferta de Oportunidades de Acceso - Deporte'
         },
         subtitle: {
-            text: 'al Deporte, Actividades Recreativas y Actividad Física'
+            text: ''
+        },
+        xAxis: {
+            categories: [{% for i in infras %}{% for j in i.infra.rows %}'{{ j.name }}'{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
         },
         yAxis: {
+            min: 0,
             title: {
                 text: ''
+            },
+            stackLabels: {
+                enabled: false,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
             }
         },
-        plotOptions: {
-            pie: {
-                shadow: false,
-                center: ['50%', '50%']
-            }
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
         },
         tooltip: {
-            valueSuffix: '%'
+            headerFormat: '<b>{point.x}</b><br/>',
+            pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+                }
+            }
         },
         series: [{
-            name: 'Browsers',
-            data: browserData,
-            size: '60%',
-            dataLabels: {
-                formatter: function () {
-                    return this.y > 5 ? this.point.name : null;
-                },
-                color: '#ffffff',
-                distance: -30
-            }
+            name: 'Niños, Niñas y Adolescentes',
+            data: [{% for i in infras %}{% for j in i.infra.rows %}{{ j.acceso.deporte.nino }}{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
         }, {
-            name: 'Versions',
-            data: versionsData,
-            size: '80%',
-            innerSize: '60%',
-            dataLabels: {
-                formatter: function () {
-                    // display only if larger than 1
-                    return this.y > 1 ? '<b>' + this.point.name + ':</b> ' +
-                        this.y + '%' : null;
-                }
+            name: 'Adultos',
+            data: [{% for i in infras %}{% for j in i.infra.rows %}{{ j.acceso.deporte.adultos }}{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
+        }, {
+            name: 'Adultos Mayores',
+            data: [{% for i in infras %}{% for j in i.infra.rows %}{{ j.acceso.deporte.mayores }}{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
+        }]
+    });
+    </script>
+    <script>
+    Highcharts.chart('accesoRecreacionContainer', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Oferta de Oportunidades de Acceso - Recreacion'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: [{% for i in infras %}{% for j in i.infra.rows %}'{{ j.name }}'{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: ''
             },
-            id: 'versions'
-        }],
-        responsive: {
-            rules: [{
-                condition: {
-                    maxWidth: 400
-                },
-                chartOptions: {
-                    series: [{
-                        id: 'versions',
-                        dataLabels: {
-                            enabled: false
-                        }
-                    }]
+            stackLabels: {
+                enabled: false,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
                 }
-            }]
-        }
+            }
+        },
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        tooltip: {
+            headerFormat: '<b>{point.x}</b><br/>',
+            pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+                }
+            }
+        },
+        series: [{
+            name: 'Niños, Niñas y Adolescentes',
+            data: [{% for i in infras %}{% for j in i.infra.rows %}{{ j.acceso.recreacion.nino }}{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
+        }, {
+            name: 'Adultos',
+            data: [{% for i in infras %}{% for j in i.infra.rows %}{{ j.acceso.recreacion.adultos }}{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
+        }, {
+            name: 'Adultos Mayores',
+            data: [{% for i in infras %}{% for j in i.infra.rows %}{{ j.acceso.recreacion.mayores }}{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
+        }]
+    });
+    </script>
+    <script>
+    Highcharts.chart('accesoActividadContainer', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Oferta de Oportunidades de Acceso - Actividad Física'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: [{% for i in infras %}{% for j in i.infra.rows %}'{{ j.name }}'{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: ''
+            },
+            stackLabels: {
+                enabled: false,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
+            }
+        },
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        tooltip: {
+            headerFormat: '<b>{point.x}</b><br/>',
+            pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+                }
+            }
+        },
+        series: [{
+            name: 'Niños, Niñas y Adolescentes',
+            data: [{% for i in infras %}{% for j in i.infra.rows %}{{ j.acceso.actividad.nino }}{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
+        }, {
+            name: 'Adultos',
+            data: [{% for i in infras %}{% for j in i.infra.rows %}{{ j.acceso.actividad.adultos }}{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
+        }, {
+            name: 'Adultos Mayores',
+            data: [{% for i in infras %}{% for j in i.infra.rows %}{{ j.acceso.actactividadvidad.mayores }}{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
+        }]
     });
     </script>
     {% endif %}
