@@ -425,7 +425,11 @@
                             {% endif %}
                             {% if type == 'uso' %}
                             <br/>
-                                <div id="usoContainer"></div>
+                                <div id="usoDeporteContainer"></div>
+                                <br/>
+                                <div id="usoRecreacionContainer"></div>
+                                <br/>
+                                <div id="usoActividadContainer"></div>
                             {% endif %}
                             {% if type == 'calidad' %}
                             <br/>
@@ -691,132 +695,186 @@
     {% endif %}
     {% if type == 'uso' %}
     <script>
-    var colors = Highcharts.getOptions().colors,
-        categories = ['Deporte', 'Recreación', 'Actividad Física'],
-        data = [{
-            y: 56.33,
-            color: colors[0],
-            drilldown: {
-                name: 'Deporte',
-                categories: ['Futbol', 'Baloncesto', 'Voleibol', 'Futbol Sala', 'Natación', 'Tenis'],
-                data: [24.13, 17.2, 1.06, 8.11, 4.33, 1.5],
-                color: colors[0]
-            }
-        }, {
-            y: 18.67,
-            color: colors[1],
-            drilldown: {
-                name: 'Recreación',
-                categories: ['Dirigida', 'Práctica Libre'],
-                data: [5.92, 12.75],
-                color: colors[1]
-            }
-        }, {
-            y: 25,
-            color: colors[2],
-            drilldown: {
-                name: 'Actividad Física',
-                categories: ['Dirigida', 'Práctica Libre'],
-                data: [14.14, 10.86],
-                color: colors[2]
-            }
-        }],
-        browserData = [],
-        versionsData = [],
-        i,
-        j,
-        dataLen = data.length,
-        drillDataLen,
-        brightness;
-    
-    
-    // Build the data arrays
-    for (i = 0; i < dataLen; i += 1) {
-    
-        // add browser data
-        browserData.push({
-            name: categories[i],
-            y: data[i].y,
-            color: data[i].color
-        });
-    
-        // add version data
-        drillDataLen = data[i].drilldown.data.length;
-        for (j = 0; j < drillDataLen; j += 1) {
-            brightness = 0.2 - (j / drillDataLen) / 5;
-            versionsData.push({
-                name: data[i].drilldown.categories[j],
-                y: data[i].drilldown.data[j],
-                color: Highcharts.Color(data[i].color).brighten(brightness).get()
-            });
-        }
-    }
-    
-    // Create the chart
-    Highcharts.chart('usoContainer', {
+    Highcharts.chart('usoDeporteContainer', {
         chart: {
-            type: 'pie'
+            type: 'column'
         },
         title: {
-            text: 'Uso de los Escenarios'
+            text: 'Uso de los Escenarios - Deporte'
         },
         subtitle: {
-            text: 'Tipo de Práctica'
+            text: ''
+        },
+        xAxis: {
+            categories: ['Parque de la Caña','Estadio Pascual Guerrero','Palmaseca','Club Olimpico','Canchas Panamericanas','Parque Alhambra']
         },
         yAxis: {
+            min: 0,
             title: {
                 text: ''
+            },
+            stackLabels: {
+                enabled: false,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
             }
         },
-        plotOptions: {
-            pie: {
-                shadow: false,
-                center: ['50%', '50%']
-            }
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
         },
         tooltip: {
-            valueSuffix: '%'
+            headerFormat: '<b>{point.x}</b><br/>',
+            pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+                }
+            }
         },
         series: [{
-            name: 'Browsers',
-            data: browserData,
-            size: '60%',
-            dataLabels: {
-                formatter: function () {
-                    return this.y > 5 ? this.point.name : null;
-                },
-                color: '#ffffff',
-                distance: -30
-            }
+            name: 'Futbol',
+            data: [25,60,25,75,80,45]
         }, {
-            name: 'Versions',
-            data: versionsData,
-            size: '80%',
-            innerSize: '60%',
-            dataLabels: {
-                formatter: function () {
-                    // display only if larger than 1
-                    return this.y > 1 ? '<b>' + this.point.name + ':</b> ' +
-                        this.y + '%' : null;
-                }
+            name: 'Baloncesto',
+            data: [15,0,30,10,10,30]
+        }, {
+            name: 'Natación',
+            data: [60,40,45,15,10,25]
+        }]
+    });
+    </script>
+    <script>
+    Highcharts.chart('usoRecreacionContainer', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Uso de los Escenarios - Recreacion'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: ['Parque de la Caña','Estadio Pascual Guerrero','Palmaseca','Club Olimpico','Canchas Panamericanas','Parque Alhambra']
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: ''
             },
-            id: 'versions'
-        }],
-        responsive: {
-            rules: [{
-                condition: {
-                    maxWidth: 400
-                },
-                chartOptions: {
-                    series: [{
-                        id: 'versions',
-                        dataLabels: {
-                            enabled: false
-                        }
-                    }]
+            stackLabels: {
+                enabled: false,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
                 }
-            }]
-        }
+            }
+        },
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        tooltip: {
+            headerFormat: '<b>{point.x}</b><br/>',
+            pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+                }
+            }
+        },
+        series: [{
+            name: 'Dirigida',
+            data: [15,10,70,5,70,20]
+        }, {
+            name: 'Práctica Libre',
+            data: [5,20,15,15,25,15]
+        }]
+    });
+    </script>
+    <script>
+    Highcharts.chart('usoActividadContainer', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Uso de los Escenarios - Actividad Física'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: ['Parque de la Caña','Estadio Pascual Guerrero','Palmaseca','Club Olimpico','Canchas Panamericanas','Parque Alhambra']
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: ''
+            },
+            stackLabels: {
+                enabled: false,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
+            }
+        },
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        tooltip: {
+            headerFormat: '<b>{point.x}</b><br/>',
+            pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+                }
+            }
+        },
+        series: [{
+            name: 'Dirigida',
+            data: [15,10,70,5,70,20]
+        }, {
+            name: 'Práctica Libre',
+            data: [30,15,10,15,25,10]
+        }]
     });
     </script>
     {% endif %}
