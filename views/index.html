@@ -1064,7 +1064,7 @@
             data: [{% for i in infras %}{% for j in i.infra.rows %}{{ j.acceso.actividad.adultos }}{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
         }, {
             name: 'Adultos Mayores',
-            data: [{% for i in infras %}{% for j in i.infra.rows %}{{ j.acceso.actactividadvidad.mayores }}{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
+            data: [{% for i in infras %}{% for j in i.infra.rows %}{{ j.acceso.actividad.mayores }}{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]
         }]
     });
     </script>
