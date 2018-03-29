@@ -364,6 +364,8 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr align="center">
+                                        <th></th>
+                                        <th></th>
                                         {% for i in neighborhoodData %}
                                             {% if loop.first %}
                                                 {% for h in i.infra.headers %}
@@ -377,6 +379,8 @@
                                     {% for i in neighborhoodData %}
                                         {% for r in i.infra.rows %}
                                            <tr>
+                                               <td><a class="nav-link" data-toggle="modal" data-target="#myModal"><p style="text-align:center;"><i class="fa fa-globe fa-fw"></i></p></a></td>
+                                               <td><a class="nav-link" href="/"><p style="text-align:center;"><i class="fa fa-calendar fa-fw"></i></p></a></td>
                                                <td>{{ r.name }}</td>
                                                <td>{{ r.value }}</td>
                                                <td>{{ r.typeInfra }}</td>
@@ -396,6 +400,28 @@
                     <!-- /.panel-body -->
                 </div>
 			{% endif %}
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"> Ubicación del Escenario</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 modal_body_map">
+                        <div class="location-map" id="location-map">
+                            <div style="width: 600px; height: 400px;" id="map_canvas"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+            </div>
+            </div>
 			{% if infraGraph %}
 			    <div class="panel-body">
                     <!-- Nav tabs -->
@@ -457,6 +483,7 @@
     <script src="/js/bootstrap.min.js"></script>
 	<script src="/js/metisMenu.min.js"></script>
     <script src="/js/sb-admin-2.js"></script>
+    <script src="/js/maps.js"></script>
     
     <!-- <script src="https://code.highcharts.com/maps/highmaps.js"></script> -->
     <!-- <script src="https://code.highcharts.com/maps/modules/exporting.js"></script> -->
@@ -465,6 +492,7 @@
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/highcharts-more.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeXh6Uk8XxBNzAiNvztkJTJy0jrMVTNo4"></script>
     
     <!-- <script src="/js/highmaps.js"></script> -->
     <!-- <script src="/js/highbubble.js"></script> -->
