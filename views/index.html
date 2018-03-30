@@ -9,10 +9,13 @@
 
     <title>{{ title }}</title>
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/sb-admin-2.css" rel="stylesheet">
-    <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="/css/maps.css" rel="stylesheet" >
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="/css/sb-admin-2.css" rel="stylesheet"/>
+    <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/maps.css" rel="stylesheet"/>
+    <link href="/css/calendar/calendar.css" rel="stylesheet"/>
+    <link href="/css/calendar/fullcalendar.min.css" rel="stylesheet"/>
+    <link href="/css/calendar/fullcalendar.print.min.css" rel="stylesheet" media='print'/>
 </head>
 
 <body>
@@ -380,7 +383,7 @@
                                         {% for r in i.infra.rows %}
                                            <tr>
                                                <td><a class="nav-link" data-toggle="modal" data-target="#myModal"><p style="text-align:center;"><i class="fa fa-globe fa-fw"></i></p></a></td>
-                                               <td><a class="nav-link" href="/"><p style="text-align:center;"><i class="fa fa-calendar fa-fw"></i></p></a></td>
+                                               <td><a class="nav-link" href="/calendar"><p style="text-align:center;"><i class="fa fa-calendar fa-fw"></i></p></a></td>
                                                <td>{{ r.name }}</td>
                                                <td>{{ r.value }}</td>
                                                <td>{{ r.typeInfra }}</td>
@@ -400,6 +403,7 @@
                     <!-- /.panel-body -->
                 </div>
 			{% endif %}
+			<!-- Modal Maps -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -422,6 +426,54 @@
             </div>
             </div>
             </div>
+            <!-- Fin Modal Maps -->
+            <!-- Modal Calendar -->
+            {% if calendar %}
+                <div id="calendar"></div>
+            {% endif %}
+            <div class="modal fade" id="myCalendarModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"> Disponibilidad</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label class="col-xs-4" for="title">Nombre</label>
+                        <input type="text" name="nombre" id="nombre" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label class="col-xs-4" for="title">Correo</label>
+                        <input type="text" name="correo" id="correo" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label class="col-xs-4" for="title">Fecha Inicio</label>
+                        <input type="text" name="fechaInicio" id="fechaInicio" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label class="col-xs-4" for="title">Fecha Fin</label>
+                        <input type="text" name="fechaFin" id="fechaFin" />
+                    </div>
+                </div>
+                <br/>
+                <p class="text-primary">Si solicitud será remitia a la SDRC y será contactado pronto.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a href="/reserva"><button type="button" class="btn btn-primary">Reservar</button></a>
+            </div>
+            </div>
+            </div>
+            </div>
+            <!-- Fin Modal Calendar -->
 			{% if infraGraph %}
 			    <div class="panel-body">
                     <!-- Nav tabs -->
@@ -484,6 +536,9 @@
 	<script src="/js/metisMenu.min.js"></script>
     <script src="/js/sb-admin-2.js"></script>
     <script src="/js/maps.js"></script>
+    <script src="/js/calendar.js"></script>
+    <script src="/js/calendar/moment.min.js"></script>
+    <script src="/js/calendar/fullcalendar.min.js"></script>
     
     <!-- <script src="https://code.highcharts.com/maps/highmaps.js"></script> -->
     <!-- <script src="https://code.highcharts.com/maps/modules/exporting.js"></script> -->

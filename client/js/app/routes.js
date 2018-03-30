@@ -275,6 +275,21 @@ module.exports = function (app) {
     	});
 	});
 	
+	app.get('/calendar', function (req, res) {
+		res.render('index', {
+    	    title : 'SDI - Sport Development Intelligence',
+    	    calendar: 1
+    	});
+	});
+	
+	app.get('/reserva', function (req, res) {
+		console.log('SIIIII');
+		res.render('index', {
+    	    title : 'SDI - Sport Development Intelligence',
+    	    widgets: 1
+    	});
+	});
+	
 	app.get('/events', function (req, res) {
 		//
 	});
