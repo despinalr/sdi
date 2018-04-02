@@ -1,16 +1,7 @@
 $(document).ready(function() {
   
     $("#botonReserva" ).click(function() {
-      $.ajax({
-        url: 'https://trial.bizagi.com/david.espinal/sdrc/webservices/workflowenginesoa.asmx/createCasesAsString?casesInfo=<BizAgiWSParam><domain>domain</domain><userName>admon</userName><Cases><Case><Process>Reservas</Process><Entities><Reservas><Nombre>Juan</Nombre><Correo>Juan@sdi.com</Correo><Telefono>3115672266</Telefono><FechaInicio>2018/10/12</FechaInicio><FechaFin>2018/10/13</FechaFin></Reservas></Entities></Case></Cases></BizAgiWSParam>',
-        type: 'GET',
-        success: function(data) { 
-            alert("Reserva Creada con Exito. Será contactado por nuestros asesores." );
-        },
-        error: function(jqXHR,error, errorThrown) {
-            alert('Error!: ' + jqXHR.status);
-        }
-      });
+      alert("Reserva Creada con Exito. Será contactado por nuestros asesores." );
     });
 
     $('#calendar').fullCalendar({

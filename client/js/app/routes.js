@@ -1,6 +1,7 @@
 module.exports = function (app) {
     
     var fs = require('fs');
+    var https = require("https");
     var mongo = require('./mongoose');
     
     app.get('/', function (req, res) {
@@ -283,11 +284,18 @@ module.exports = function (app) {
 	});
 	
 	app.get('/reserva', function (req, res) {
-		console.log('SIIIII');
-		res.render('index', {
-    	    title : 'SDI - Sport Development Intelligence',
-    	    widgets: 1
-    	});
+		var response = res;
+		https.get('https://trial.bizagi.com/david.espinal/sdrc/webservices/workflowenginesoa.asmx/createCasesAsString?casesInfo=<BizAgiWSParam><domain>domain</domain><userName>admon</userName><Cases><Case><Process>Reservas</Process><Entities><Reservas><Nombre>Juan</Nombre><Correo>Juan@sdi.com</Correo><Telefono>3115672266</Telefono><FechaInicio>2018/10/12</FechaInicio><FechaFin>2018/10/13</FechaFin></Reservas></Entities></Case></Cases></BizAgiWSParam>', (res) => {
+			console.log('statusCode:', res.statusCode);
+			console.log('headers:', res.headers);
+		
+			response.render('index', {
+				title : 'SDI - Sport Development Intelligence',
+				widgets: 1
+			});
+		}).on('error', (e) => {
+		  console.error('Error:' + e);
+		});
 	});
 	
 	app.get('/events', function (req, res) {
