@@ -25,43 +25,43 @@ $(document).ready(function() {
       events: [
         {
           title: 'America vs Junior',
-          start: '2018-04-01'
+          start: '2018-05-01'
         },
         {
           title: 'Concierto',
-          start: '2018-04-07',
+          start: '2018-05-07',
           end: '2018-04-10'
         },
         {
           id: 999,
           title: 'America de Cali Libertadores',
-          start: '2018-04-09T16:00:00'
+          start: '2018-05-09T16:00:00'
         },
         {
           title: 'Misión Carismática Internacional',
           start: '2018-04-11',
-          end: '2018-04-13'
+          end: '2018-05-13'
         },
         {
           title: 'Mantenimiento',
           start: '2018-04-14T10:30:00',
-          end: '2018-04-15T12:30:00'
+          end: '2018-05-15T12:30:00'
         },
         {
           title: 'Fiesta Banco de Occidente',
-          start: '2018-04-12T12:00:00'
+          start: '2018-05-12T12:00:00'
         },
         {
           title: 'Concierto Maluma',
-          start: '2018-04-22T14:30:00'
+          start: '2018-05-22T14:30:00'
         },
         {
           title: 'Vicente Fernandez',
-          start: '2018-04-13T07:00:00'
+          start: '2018-05-13T07:00:00'
         },
         {
           title: 'América vs Jaguares',
-          start: '2018-04-28T07:00:00'
+          start: '2018-05-28T07:00:00'
         }
       ]
       
