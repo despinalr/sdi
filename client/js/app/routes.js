@@ -302,8 +302,33 @@ module.exports = function (app) {
 		//
 	});
 	
+	app.get('/tramitar', function (req, res) {
+		res.render('index', {
+    	    title : 'SDI - Sport Development Intelligence',
+    	    tramitar: 1
+    	});
+	});
+	
+	app.get('/iniciarTramite', function (req, res) {
+		var response = res;
+		https.get('https://trial.bizagi.com/david.espinal/sdrc/webservices/workflowenginesoa.asmx/createCasesAsString?casesInfo=<BizAgiWSParam><domain>sdrc</domain><userName>Asesor</userName><Cases><Case><Process>Reservas</Process><Entities><Reservas><Escenario>Pascual Guerrero</Escenario><ValorEscenario>35000000</ValorEscenario><NumerodeDocumento>78665431</NumerodeDocumento><Nombre>Juan</Nombre><Correo>Juan@sdi.com</Correo><Telefono>3115672266</Telefono><FechaInicio>2018/10/12</FechaInicio><FechaFin>2018/10/13</FechaFin></Reservas></Entities></Case></Cases></BizAgiWSParam>', (res) => {
+			console.log('statusCode:', res.statusCode);
+			console.log('headers:', res.headers);
+		
+			response.render('index', {
+				title : 'SDI - Sport Development Intelligence',
+				widgets: 1
+			});
+		}).on('error', (e) => {
+		  console.error('Error:' + e);
+		});
+	});
+	
 	app.get('/organizations', function (req, res) {
-		//
+		res.render('index', {
+    	    title : 'SDI - Sport Development Intelligence',
+    	    organizations: 1
+    	});
 	});
 	
 	app.get('/access', function (req, res) {

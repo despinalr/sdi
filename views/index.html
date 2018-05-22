@@ -273,6 +273,23 @@
                     </div>
                 </div>
 			{% endif %}
+			{% if organizations %}
+    			<div class="form-group">
+                    <label>Seleccione su trámite</label>
+                    <select class="form-control">
+                        <option>Otorgamiento, renovación o actualización del reconocimiento deportivo</option>
+                        <option>Reconocimiento de personería jurídica</option>
+                        <option>Inscripción de Dignatarios</option>
+                        <option>Certificado de Existencia y Representación Legal</option>
+                        <option>Reforma Estatutaria</option>
+                        <option>Registro y Sello de Libros de Actas</option>
+                    </select>
+                </div>
+                <a href="/tramitar"><button type="button" id="botonTramitar" class="btn btn-primary">Iniciar</button></a>
+			{% endif %}
+			{% if tramitar %}
+                <a href="/iniciarTramite"><button type="button" id="botonTramitar" class="btn btn-primary">Enviar</button></a>
+			{% endif %}
 			{% if widgetsProcesses %}
 		        <div class="row">
     		        <div class="col-lg-3 col-md-6">
