@@ -325,10 +325,10 @@ module.exports = function (app) {
 	});
 	
 	app.get('/organizations', function (req, res) {
-		res.render('index', {
+		/*res.render('index', {
     	    title : 'SDI - Sport Development Intelligence',
     	    organizations: 1
-    	});
+    	});*/
 	});
 	
 	app.get('/access', function (req, res) {
@@ -340,7 +340,10 @@ module.exports = function (app) {
 	});
 	
 	app.get('/procedures', function (req, res) {
-		//
+		res.render('index', {
+    	    title : 'SDI - Sport Development Intelligence',
+    	    organizations: 1
+    	});
 	});
 	
 };
