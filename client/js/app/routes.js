@@ -303,10 +303,10 @@ module.exports = function (app) {
 	});
 	
 	app.get('/tramitar', function (req, res) {
-		res.render('index', {
+		/*res.render('index', {
     	    title : 'SDI - Sport Development Intelligence',
     	    tramitar: 1
-    	});
+    	});*/
 	});
 	
 	app.get('/iniciarTramite', function (req, res) {
