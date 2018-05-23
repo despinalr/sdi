@@ -303,10 +303,18 @@ module.exports = function (app) {
 	});
 	
 	app.get('/tramitar', function (req, res) {
-		/*res.render('index', {
-    	    title : 'SDI - Sport Development Intelligence',
-    	    tramitar: 1
-    	});*/
+		var response = res;
+		https.get('https://trial.bizagi.com/david.espinal/sdrc/webservices/workflowenginesoa.asmx/createCasesAsString?casesInfo=<BizAgiWSParam><domain>domain</domain><userName>admon</userName><Cases><Case><Process>Tramites</Process><Entities><Tramites><Tramite>Certificado de Existencia y Representación Legal</Tramite></Tramites></Entities></Case></Cases></BizAgiWSParam>', (res) => {
+			console.log('statusCode:', res.statusCode);
+			console.log('headers:', res.headers);
+		
+			response.render('index', {
+				title : 'SDI - Sport Development Intelligence',
+				widgets: 1
+			});
+		}).on('error', (e) => {
+		  console.error('Error:' + e);
+		});
 	});
 	
 	app.get('/iniciarTramite', function (req, res) {
