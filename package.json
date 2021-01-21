@@ -8,7 +8,7 @@
   "dependencies": {
     "async": "~0.2.8",
     "express": "~3.2.4",
-    "socket.io": "~0.9.14",
+    "socket.io": "~2.4.0",
     "consolidate": "~0.15.0",
     "swig": "~1.4.2",
     "mongoose": "~5.0.1"
